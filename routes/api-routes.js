@@ -104,7 +104,7 @@ router.post(
 router.post('/translate', (req, res) => {
 
   // Creates a client
-  const translate = new Translate();
+  const translate = new Translate({ keyFilename: keys.google.applicationCredentials });
 
   const text = req.body.text;
   const targetLang = req.body.targetLang;
