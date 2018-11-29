@@ -1,4 +1,5 @@
 // handlebars version
+require("dotenv").config()
 
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -10,7 +11,6 @@ const authRoutes = require('./routes/auth-routes');
 const displayRoutes = require('./routes/display-routes');
 const apiRoutes = require('./routes/api-routes');
 const dbRoutes = require('./routes/db-routes');
-
 const cookieSession = require('cookie-session');
 const passport = require("passport");
 var app = express();

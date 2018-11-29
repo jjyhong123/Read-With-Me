@@ -13,10 +13,12 @@ const vision = require('@google-cloud/vision');
 const { Translate } = require('@google-cloud/translate');
 
 // Creates a client (FIX ROUTE?)
-const client = new vision.ImageAnnotatorClient({
-  projectID: "read-with-me-auth",
-  keyFilename: "./config/keys/read-with-me-auth-credentials.json"
-});
+const client = new vision.ImageAnnotatorClient(
+  {
+    keyFilename: keys.google.applicationCredentials
+  }
+);
+
 
 // END OF GOOGLE STUFF
 
