@@ -104,6 +104,7 @@ router.post(
     })
     .catch(err => {
       console.error('ERROR:', err);
+      console.log("Help me")
     });
     
   }
