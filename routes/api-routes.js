@@ -89,7 +89,7 @@ router.post(
     let url = req.file.location
 
     client
-    .textDetection("https://s3-us-west-1.amazonaws.com/read-with-me-bucket/1543634330825")
+    .textDetection("http://blog.awok.com/wp-content/uploads/2018/10/reverse-image-search.png")
     .then(results => {
       let detections = results[0].textAnnotations[0];
       if (detections) {
