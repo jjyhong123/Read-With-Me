@@ -85,6 +85,8 @@ router.post(
   '/add',
   singleUpload,
   (req, res) => {
+    console.log(req.file.location)
+    /*
     client
     .textDetection(req.file.location)
     .then(results => {
@@ -102,6 +104,7 @@ router.post(
     .catch(err => {
       console.error('ERROR:', err);
     });
+    */
   }
 );
 
