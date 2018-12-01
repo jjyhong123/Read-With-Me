@@ -2,7 +2,6 @@ const express = require('express');
 const multer = require('multer')
 const multerS3 = require("multer-s3")
 const bodyParser = require('body-parser');
-const images = require('../lib/images');
 const keys = require('../config/keys/keys');
 const router = express.Router();
 
