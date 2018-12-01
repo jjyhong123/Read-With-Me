@@ -89,10 +89,11 @@ router.post(
     let url = req.file.location
 
     client
-    .textDetection("http://blog.awok.com/wp-content/uploads/2018/10/reverse-image-search.png")
+    .textDetection(url)
     .then(results => {
       let detections = results[0].textAnnotations[0];
       if (detections) {
+        console.log(detections)
         let language = detections.locale;
         let text = detections.description.replace(new RegExp('\\n', 'g'), ' ')
         let image = url;
