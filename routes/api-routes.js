@@ -86,9 +86,29 @@ router.post(
   singleUpload,
   (req, res) => {
     console.log(req.file.location)
+    let url = req.file.location
+
+    client
+    .textDetection("https://s3-us-west-1.amazonaws.com/read-with-me-bucket/1543634330825")
+    .then(results => {
+      let detections = results[0].textAnnotations[0];
+      if (detections) {
+        let language = detections.locale;
+        let text = detections.description.replace(new RegExp('\\n', 'g'), ' ')
+        let image = url;
+        let speaker = convertLanguageToSpeaker(language);
+        handleTextToVoice(speaker, text, image, req, res);
+      } else {
+        res.render("picture", { user: req.user, err: "No text detected in image." })
+      }
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+
     /*
     client
-    .textDetection(req.file.location)
+    .textDetection(url)
     .then(results => {
       let detections = results[0].textAnnotations[0];
       if (detections) {
@@ -105,6 +125,7 @@ router.post(
       console.error('ERROR:', err);
     });
     */
+    
   }
 );
 
