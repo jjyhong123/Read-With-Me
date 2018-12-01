@@ -22,7 +22,7 @@
             <div class="input-group">
               <form action="/api/add" method="post" enctype="multipart/form-data">
                 <!--input type="file" name="image" id="inputGroupFile04" /-->
-                <input type="file" name="image" accept="image/*" capture="camera"/>
+                <input type="file" name="image" accept="image/*" capture="camera" />
                 <button class="btn btn-dark" type="submit">Upload</button>
               </form>
               <!-- No text detected message -->
@@ -32,8 +32,7 @@
 
             <!-- Image thumbnail -->
             {{#if image}}
-              <img src="{{image}}" alt="Selected image thumbnail" height="100px" width="100px">
-            {{/if}}
+            <img src="{{image}}" alt="Selected image thumbnail" height="100px" width="100px"> {{/if}}
 
             <br /> {{#if src}}
             <!-- Translate -->
@@ -62,12 +61,25 @@
           <div class="card-body text-success">
             <p class="card-text">{{text}}</p>
           </div>
-
-          <audio id="polly-audio">
+          <!--
+          <audio controls id="polly-audio">
             <source src={{src}} type="audio/mp3" />
             <p>Your browser doesn't support HTML5 audio. Here is a
               <a href={{src}}>link to the audio</a> instead.</p>
           </audio>
+          -->
+
+          <audio id="my-audio">
+            <source src={{src}} type="audio/mp3" />
+            <p>Your browser doesn't support HTML5 audio. Here is a
+              <a href={{src}}>link to the audio</a> instead.</p>
+          </audio>
+          <button id="play">play</button>
+          <button id="pause">pause</button>
+
+
+
+
 
           {{#if user}}
           <form action="/db/save" method="post">

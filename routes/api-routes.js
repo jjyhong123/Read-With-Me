@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const multerS3 = require("multer-s3")
 const bodyParser = require('body-parser');
 const images = require('../lib/images');
 const keys = require('../config/keys/keys');
@@ -14,12 +14,8 @@ const { Translate } = require('@google-cloud/translate');
 
 // Creates a client (FIX ROUTE?)
 const client = new vision.ImageAnnotatorClient(
-  {
-    keyFilename: keys.google.applicationCredentials
-  }
+  { keyFilename: keys.google.applicationCredentials }
 );
-
-
 // END OF GOOGLE STUFF
 
 // AMAZON STUFF
@@ -33,7 +29,23 @@ AWS.config = new AWS.Config({
   secretAccessKey: keys.amazon.secretAccessKey
 });
 
-// AMAZON STUFF
+const s3 = new AWS.S3();
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'read-with-me-bucket',
+    acl: 'public-read',
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString())
+    }
+  })
+})
+
+const singleUpload = upload.single("image")
 
 const convertLanguageToSpeaker = (language) => {
   const languageSpeakers = { 'zh': 'Zhiyu', 'da': 'Naja', 'nl': 'Lotte', 'en': 'Joanna', 'fr': 'Celine', 'de': 'Marlene', 'hi': 'Aditi', 'is': 'Dora', 'it': 'Carla', 'ja': 'Mizuki', 'ko': 'Seoyeon', 'no': 'Liv', 'pl': 'Ewa', 'pt': 'Ines', 'ro': 'Carmen', 'ru': 'Tatyana', 'es': 'Lucia', 'sv': 'Astrid', 'tr': 'Filiz' }
@@ -72,32 +84,25 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 router.post(
   '/add',
-  images.multer.single('image'),
-  images.sendUploadToGCS,
-  (req, res, next) => {
-
-    // GOOGLE STUFF
-    let data = req.body;
-    data.imageUrl = req.file.cloudStoragePublicUrl;
-
-    // Performs text detection on the local file
+  singleUpload,
+  (req, res) => {
     client
-      .textDetection(data.imageUrl)
-      .then(results => {
-        let detections = results[0].textAnnotations[0];
-        if (detections) {
-          let language = detections.locale;
-          let text = detections.description.replace(new RegExp('\\n', 'g'), ' ')
-          let image = data.imageUrl;
-          let speaker = convertLanguageToSpeaker(language);
-          handleTextToVoice(speaker, text, image, req, res);
-        } else {
-          res.render("picture", { user: req.user, err: "No text detected in image." })
-        }
-      })
-      .catch(err => {
-        console.error('ERROR:', err);
-      });
+    .textDetection(req.file.location)
+    .then(results => {
+      let detections = results[0].textAnnotations[0];
+      if (detections) {
+        let language = detections.locale;
+        let text = detections.description.replace(new RegExp('\\n', 'g'), ' ')
+        let image = req.file.location;
+        let speaker = convertLanguageToSpeaker(language);
+        handleTextToVoice(speaker, text, image, req, res);
+      } else {
+        res.render("picture", { user: req.user, err: "No text detected in image." })
+      }
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
   }
 );
 
