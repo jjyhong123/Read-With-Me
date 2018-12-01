@@ -85,18 +85,15 @@ router.post(
   '/add',
   singleUpload,
   (req, res) => {
-    console.log(req.file.location)
-    let url = req.file.location
-
     client
-    .textDetection(url)
+    .textDetection(req.file.location)
     .then(results => {
       let detections = results[0].textAnnotations[0];
       if (detections) {
         console.log(detections)
         let language = detections.locale;
         let text = detections.description.replace(new RegExp('\\n', 'g'), ' ')
-        let image = url;
+        let image = req.file.location;
         let speaker = convertLanguageToSpeaker(language);
         handleTextToVoice(speaker, text, image, req, res);
       } else {
