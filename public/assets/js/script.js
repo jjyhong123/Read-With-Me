@@ -9,14 +9,16 @@ $(document).ready(() => {
 
       reader.onload = function (e) {
 
+        /*
         $('#placeholder-image').attr('src', e.target.result);
         $('#placeholder-image').attr('alt', "selected image thumbnail");
         $('#placeholder-image').prev('#placeholder-image').attr('id', "selected-image");
         console.log(e.target.result)
-
-        /* $('#imgUrl').attr('value', 1);
-        $('#imgUrl').attr('value', e.target.result);
         */
+
+         
+        $('#selected-image').attr('src', e.target.result);
+        
       }
 
       reader.readAsDataURL(input.files[0]);

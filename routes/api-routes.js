@@ -82,8 +82,9 @@ router.post(
         if (!data.TextDetections.length) return res.render("picture", { user: req.user, image: image, err: "No text detected in image." })
         let textDetections = data.TextDetections
         console.log(textDetections)
-        let lineDetections = textDetections.filter(detection => detection.Type === "LINE" && detection.Confidence >= 90)
-        let textArray = lineDetections.map(detection => detection.DetectedText)
+        //let lineDetections = textDetections.filter(detection => detection.Type === "LINE" && detection.Confidence >= 90)
+        let wordDetections = textDetections.filter(detection => detection.Type === "WORD" && detection.Confidence >= 75)
+        let textArray = wordDetections.map(detection => detection.DetectedText)
         let text = textArray.join(' ')
         const handleLanguageDetection = (text) => {
           let params = {

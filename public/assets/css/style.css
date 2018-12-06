@@ -33,6 +33,16 @@ p {
     background-image: url('/assets/images/morning-1.png')
 }
 
+#slide3 {
+    color: white;
+    height: 450px;
+    padding-top: 100px;
+    background-position: 50% 65%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url('/assets/images/tokyo-1.png')
+}
+
 .home-card {
     border-style: none;
 }
@@ -44,7 +54,7 @@ p {
 }
 */
 
-.item-card:not(:last-child) {
+.item-card {
     margin-bottom: 20px;
 }
 
@@ -66,8 +76,10 @@ p {
     padding: 7.5px 0 0 0;
 }
 
+/*
 #right-side {
     border-width: 1px;
     border-style: solid;
     border-color: black;
 }
+*/

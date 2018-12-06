@@ -16,11 +16,19 @@
 
             {{#each user.library}}
             <div class="card item-card">
-                <!--div class="card-header">
-                    <h5>{{text}}</h5>
-                </div-->
+
                 <div class="card-body">
-                    <div style="display: inline-block; ">
+
+                    <img src="{{image}}" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px" style="float: left; margin-right: 20px;">
+                        <p>{{text}}</p>
+                        <audio controls id="polly-audio" >
+                            <source src={{pollyUrl}} type="audio/mp3" />
+                            <p>Your browser doesn't support HTML5 audio. Here is a
+                                <a href={{pollyUrl}}>link to the audio</a> instead.</p>
+                        </audio>
+                        <button class="btn btn-dark delete-btn" id="{{_id}}" style="margin-left: 60px">Remove from library</button>
+
+                    <!--div style="display: inline-block; ">
                         <p>{{text}}</p>
                     </div>
 
@@ -32,7 +40,7 @@
                                 <a href={{pollyUrl}}>link to the audio</a> instead.</p>
                         </audio>
                         <button class="btn btn-dark delete-btn" id="{{_id}}" style="vertical-align: middle;">Remove from library</button>
-                    </div>
+                    </div-->
                 </div>
 
 
