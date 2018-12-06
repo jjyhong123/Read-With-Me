@@ -1,6 +1,7 @@
 const db = require("../models");
+const express = require('express');
 
-const router = require('express').Router();
+const router = express.Router();
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", (req, res) => {
@@ -8,15 +9,18 @@ router.get("/", (req, res) => {
 })
 
 router.get("/picture", (req, res) => {
-  res.render("picture", { user: req.user })
+  
+    res.render("picture", { user: req.user })
+  
 })
 
 router.get("/library", (req, res) => {
+
   if (req.user) {
     db.User.findOne({ googleId: req.user.googleId })
     .populate("library")
     .then((dbUser) => {
-      res.json(dbUser)
+      res.render("library", { user: dbUser })
     })
     .catch((err) => res.json(err))
   } else {

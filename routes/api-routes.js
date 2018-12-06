@@ -1,24 +1,11 @@
 const express = require('express');
 const multer = require('multer')
-const multerS3 = require("multer-s3")
 const bodyParser = require('body-parser');
 const keys = require('../config/keys/keys');
 const router = express.Router();
-
-// GOOGLE STUFF
-'use strict';
-
-const vision = require('@google-cloud/vision');
 const { Translate } = require('@google-cloud/translate');
-
-// Creates a client (FIX ROUTE?)
-const client = new vision.ImageAnnotatorClient(
-  { keyFilename: keys.google.applicationCredentials }
-);
-// END OF GOOGLE STUFF
-
-// AMAZON STUFF
 const AWS = require('aws-sdk');
+const db = require("../models");
 
 AWS.config.logger = console;
 
@@ -28,30 +15,21 @@ AWS.config = new AWS.Config({
   secretAccessKey: keys.amazon.secretAccessKey
 });
 
-const s3 = new AWS.S3();
+const rekognition = new AWS.Rekognition({});
+const polly = new AWS.Polly.Presigner();
+const comprehend = new AWS.Comprehend({ apiVersion: '2017-11-27' });
 
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'read-with-me-bucket',
-    acl: 'public-read',
-    metadata: function (req, file, cb) {
-      cb(null, { fieldName: file.fieldname });
-    },
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString())
-    }
-  })
-})
+// Automatically parse request body as form data
+router.use(bodyParser.urlencoded({ extended: false }));
 
-const singleUpload = upload.single("image")
+var testMulter = multer().single("image")
 
 const convertLanguageToSpeaker = (language) => {
   const languageSpeakers = { 'zh': 'Zhiyu', 'da': 'Naja', 'nl': 'Lotte', 'en': 'Joanna', 'fr': 'Celine', 'de': 'Marlene', 'hi': 'Aditi', 'is': 'Dora', 'it': 'Carla', 'ja': 'Mizuki', 'ko': 'Seoyeon', 'no': 'Liv', 'pl': 'Ewa', 'pt': 'Ines', 'ro': 'Carmen', 'ru': 'Tatyana', 'es': 'Lucia', 'sv': 'Astrid', 'tr': 'Filiz' }
   return languageSpeakers[language]
 }
 
-const handleTextToVoice = (hablante, texto, imagen, req, res) => {
+const handleTextToVoice = (hablante, texto, imagen, req, res, imagenId) => {
   const { url, ...params } = {
     OutputFormat: "mp3",
     Text: texto,
@@ -60,53 +38,69 @@ const handleTextToVoice = (hablante, texto, imagen, req, res) => {
     url: null
   };
 
-  const polly = new AWS.Polly.Presigner();
   polly.getSynthesizeSpeechUrl(params, [60 * 60 * 24 * 7], (error, url) => {
     if (error) {
       console.log(error.code, error.stack, error)
     }
-    res.render("picture", { user: req.user, src: url, image: imagen, text: texto })
+
+
+    if (!imagenId) {
+
+      db.Image.create({ image: imagen })
+        .then((dbImage) => {
+          res.render("picture", { user: req.user, src: url, image: imagen, text: texto, imageId: dbImage._id })
+        })
+        .catch(err => res.json(err))
+
+    }
+
+    else {
+      res.render("picture", { user: req.user, src: url, image: imagen, text: texto, imageId: imagenId })
+    }
+
+
+
+    //res.render("picture", { user: req.user, src: url, image: imagen, text: texto }) // only to aid with CSS, delete after
 
   });
 };
 
-const Polly = () => {
-  return new AWS.Polly({ apiVersion: '2016-06-10' })
-}
-
-// END OF AMAZON STUFF
-
-// Automatically parse request body as form data
-router.use(bodyParser.urlencoded({ extended: false }));
-
-// ----START OF ROUTES---- //
-
 router.post(
   '/add',
-  singleUpload,
+  testMulter,
   (req, res) => {
-    console.log(req.file.location)
-    client
-    .textDetection(req.file.location)
-    .then(results => {
-      console.log(results)
-      let detections = results[0].textAnnotations[0];
-      if (detections) {
-        console.log(detections)
-        let language = detections.locale;
-        let text = detections.description.replace(new RegExp('\\n', 'g'), ' ')
-        let image = req.file.location;
-        let speaker = convertLanguageToSpeaker(language);
-        handleTextToVoice(speaker, text, image, req, res);
-      } else {
-        res.render("picture", { user: req.user, err: "No text detected in image." })
+    let image = "data:image/png;base64," + req.file.buffer.toString('base64')
+
+    let params = {
+      Image: {
+        Bytes: req.file.buffer
       }
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-      console.log("Help me")
+    }
+    rekognition.detectText(params, function (err, data) {
+      if (err) return res.render("picture", { user: req.user, image: image, err: "An error occurred." })
+      else {
+        if (!data.TextDetections.length) return res.render("picture", { user: req.user, image: image, err: "No text detected in image." })
+        let textDetections = data.TextDetections
+        console.log(textDetections)
+        let lineDetections = textDetections.filter(detection => detection.Type === "LINE" && detection.Confidence >= 90)
+        let textArray = lineDetections.map(detection => detection.DetectedText)
+        let text = textArray.join(' ')
+        const handleLanguageDetection = (text) => {
+          let params = {
+            Text: text
+          };
+          comprehend.detectDominantLanguage(params, function (err, data) {
+            if (err) res.render("picture", { user: req.user, image: image, err: "An error occurred." })
+            else {
+              let language = data.Languages[0].LanguageCode
+              let speaker = convertLanguageToSpeaker(language)
+              handleTextToVoice(speaker, text, image, req, res, null);
+            }
+          });
+        }
+        handleLanguageDetection(text);
+      }
     });
-    
   }
 );
 
@@ -117,22 +111,41 @@ router.post('/translate', (req, res) => {
 
   const text = req.body.text;
   const targetLang = req.body.targetLang;
-  const image = req.body.image;
+  const imageId = req.body.imageId;
   const options = { to: targetLang };
 
-  translate
-    .translate(text, options)
-    .then(results => {
-      let translatedText = results[0];
 
-      let speaker = convertLanguageToSpeaker(targetLang);
-      handleTextToVoice(speaker, translatedText, image, req, res);
+  db.Image.findById(imageId)
+    .then((dbImage) => {
+      translate
+        .translate(text, options)
+        .then(results => {
+          let translatedText = results[0];
 
+          let speaker = convertLanguageToSpeaker(targetLang);
+          handleTextToVoice(speaker, translatedText, dbImage.image, req, res, imageId);
+
+        })
+        .catch(err => {
+          console.error('ERROR:', err);
+        });
     })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .catch(err => res.json(err))
 
+  /*
+    translate
+      .translate(text, options)
+      .then(results => {
+        let translatedText = results[0];
+  
+        let speaker = convertLanguageToSpeaker(targetLang);
+        handleTextToVoice(speaker, translatedText, image, req, res);
+  
+      })
+      .catch(err => {
+        console.error('ERROR:', err);
+      });
+  */
 })
 
 module.exports = router;
