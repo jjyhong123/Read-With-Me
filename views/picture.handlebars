@@ -29,15 +29,7 @@
               </div>
             </div>
 
-            <div id="right-side" style="display: inline-block; float: right; vertical-align: middle">
-
-                {{#unless image}}
-                <img src="https://via.placeholder.com/150" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px">
-                {{else}}
-                <img src="{{image}}" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px">
-                {{/unless}}
-                
-            </div>
+            <div id="right-side" style="display: inline-block; float: right; vertical-align: middle"></div>
 
           </div>
 
@@ -95,18 +87,19 @@
               </audio>
 
               {{#if user}}
-              <form action="/db/save" method="post" style="display: inline;" id="save-form">
+              <!--form action="/db/save" method="post" style="display: inline;" id="save-form"-->
 
-                <input type="hidden" name="pollyUrl" value="{{src}}" />
+                <!--input type="hidden" name="pollyUrl" value="{{src}}" />
                 <input type="hidden" name="text" value="{{text}}" />
-                <input type="hidden" name="imageId" value="{{imageId}}" /> {{#if dbRedirect}}
+                <input type="hidden" name="imageId" id="imageId" value="" /--> 
+                
+                {{#if dbRedirect}}
                 <span style="margin-left: 10px;">Item successfully saved.</span>
                 {{else}}
-                <button class="btn btn-dark" type="submit" style="margin-left: 65px;">Save to library!</button>
-                <!--style="margin-left: 15px;"-->
+                <button class="btn btn-dark" id="saveBtn" type="submit" style="margin-left: 65px;">Save to library!</button>
                 {{/if}}
 
-              </form>
+              <!--/form-->
               {{/if}}
             </div>
 
@@ -135,3 +128,20 @@
   </div>
 
 </div>
+
+<script>
+  $(() => {
+    // Extract image url from session storage
+    let imageUrl = sessionStorage.getItem('imageUrl')
+    if (imageUrl) {
+      $("#right-side").html('<img src="' + imageUrl + '" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px">')
+
+      $("#saveBtn").on("click", () => {
+        $.post("/db/save", {}, )
+      })
+    } 
+    else {
+      $("#right-side").html('<img src="https://via.placeholder.com/150" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px">')
+    }
+  })
+</script>
