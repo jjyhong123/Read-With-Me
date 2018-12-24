@@ -12,7 +12,7 @@ router.post("/save", (req, res) => {
                 .then((dbItem) => {
                     db.User.findOneAndUpdate({ googleId: req.user.googleId }, { $push: { library: dbItem._id } }, { new: true })
                         .then((dbUser) => {
-                            res.render("picture", { user: req.user, src: req.body.pollyUrl, text: req.body.text, img: dbUser.mostRecentImage, dbRedirect: true });
+                            res.render("picture", { user: req.user, src: req.body.pollyUrl, text: req.body.text, img: dbUser.mostRecentImage, dbRedirect: true, picture: true });
                         })
                         .catch(err => res.json(err))
                 })

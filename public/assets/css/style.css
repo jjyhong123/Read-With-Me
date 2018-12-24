@@ -1,11 +1,33 @@
 /* Apply to everything */
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+
 body {
     font-family: 'Roboto Condensed', sans-serif;
+    position: relative;
+    margin: 0;
+    padding-bottom: 150px;
+    min-height: 100%;
 }
 
 h1 {
     text-align: center;
+    font-family: 'Walter Turncoat';
     font-size: 50px;
+}
+
+h2 {
+    font-size: 37px;
 }
   
 h3 {
@@ -16,8 +38,27 @@ p {
     font-size: 25px;
 }
 
-li {
+.nav-item {
     font-size: 20px;
+    margin: 10px;
+}
+
+footer {
+    display: flex;
+    align-items: bottom;
+    justify-content: center;
+    color: white;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 60px;
+    height: 100px;
+    background-color: #343a40;  
+}
+
+.container {
+    margin: 0 auto;
 }
 
 

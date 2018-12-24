@@ -46,7 +46,7 @@ const handleTextToVoice = (hablante, texto, req, res, img) => {
     if (error) {
       console.log(error.code, error.stack, error)
     }
-    res.render("picture", { user: req.user, src: url, text: texto, img: img })
+    res.render("picture", { user: req.user, src: url, text: texto, img: img, picture: true })
   });
 };
 
@@ -55,8 +55,8 @@ router.post(
   testMulter,
   (req, res) => {
     client.textDetection(req.file.buffer, (err, data) => {
-      if (err) return res.render("picture", { user: req.user, err: "An error occurred." })
-      if (!data.textAnnotations) return res.render("picture", { user: req.user, err: "No text detected in image." })
+      if (err) return res.render("picture", { user: req.user, err: "An error occurred.", picture: true })
+      if (!data.textAnnotations) return res.render("picture", { user: req.user, err: "No text detected in image.", picture: true })
       // If user is signed in, save this image buffer to database
       if (req.user) {
         db.User.findOneAndUpdate({ googleId: req.user.googleId }, { mostRecentImage: req.file.buffer }).catch(err => res.json(err))

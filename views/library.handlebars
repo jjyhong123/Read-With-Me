@@ -3,9 +3,12 @@
 
 <div class="container">
 
+    {{#if user}}
     <div class="row">
         <div class="col-md-12">
-            <h3 style="text-align: center"><strong>Click on any image to view it in the picture page.</strong></h3>
+            <h3 style="text-align: center">
+                <strong>Click on any image to view it in the picture page.</strong>
+            </h3>
         </div>
     </div>
 
@@ -13,7 +16,7 @@
         {{#each user.library}}
         <div class="col-md-4">
             <div id="{{_id}}" style="margin-top: 50px; text-align: center">
-                
+
                 <div class="my-wrapper">
                     <form action="/api/review" method="post">
                         <input type="hidden" name="id" value="{{_id}}" />
@@ -25,5 +28,16 @@
         </div>
         {{/each}}
     </div>
+    {{else}}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 style="text-align: center">
+                <strong>You must log in to access your library.</strong>
+            </h3>
+        </div>
+    </div>
+    {{/if}}
 
 </div>
+
+{{> footer-partial }}

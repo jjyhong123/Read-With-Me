@@ -14,17 +14,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item">
-          <a class="nav-link" href="/"> Home
-          </a>
+        {{#if home}} <li class="nav-item active"> {{else}} <li class="nav-item"> {{/if}}
+          <a class="nav-link" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/library"> Library
-          </a>
+
+        {{#if library}} <li class="nav-item active"> {{else}} <li class="nav-item"> {{/if}}
+          <a class="nav-link" href="/library">Library</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/picture"> Picture
-          </a>
+
+        {{#if picture}} <li class="nav-item active"> {{else}} <li class="nav-item"> {{/if}}
+          <a class="nav-link" href="/picture">Picture</a>
         </li>
 
         {{#if user}}
