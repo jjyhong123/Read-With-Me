@@ -5,9 +5,18 @@ body {
 
 h1 {
     text-align: center;
+    font-size: 50px;
 }
   
+h3 {
+    font-size: 30px;
+}
+
 p {
+    font-size: 25px;
+}
+
+li {
     font-size: 20px;
 }
 
@@ -15,29 +24,18 @@ p {
 /* Home page CSS */
 #slide1 {
     color: white;
-    height: 400px;
-    padding-top: 100px;
-    background-position: 50% 7%;
+    height: 425px;
+    padding-top: 115px;
+    background-position: 50% 22%;
     background-repeat: no-repeat;
     background-size: 100%;
     background-image: url('/assets/images/menu-1.png')
 }
 
-/*
-#slide2 {
-    color: white;
-    height: 400px;
-    padding-top: 100px;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-image: url('/assets/images/morning-1.png')
-}*/
-
 #slide3 {
     color: white;
-    height: 400px;
-    padding-top: 100px;
+    height: 425px;
+    padding-top: 115px;
     background-position: 50% 65%;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -61,6 +59,10 @@ p {
 #polly-audio {
     /*margin: auto auto 10px auto;*/
     vertical-align: middle;
+}
+
+.card-header {
+    font-size: 20px;
 }
 
 .card-footer {

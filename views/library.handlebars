@@ -5,16 +5,14 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1>Click any image to view it in the picture page.</h1>
+            <h3 style="text-align: center"><strong>Click on any image to view it in the picture page.</strong></h3>
         </div>
     </div>
-
-    <br />
 
     <div class="row">
         {{#each user.library}}
         <div class="col-md-4">
-            <div id="{{_id}}" style="margin-bottom: 50px; text-align: center">
+            <div id="{{_id}}" style="margin-top: 50px; text-align: center">
                 
                 <div class="my-wrapper">
                     <form action="/api/review" method="post">
