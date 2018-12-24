@@ -9,9 +9,7 @@ router.get("/", (req, res) => {
 })
 
 router.get("/picture", (req, res) => {
-  
-    res.render("picture", { user: req.user })
-  
+  res.render("picture", { user: req.user })
 })
 
 router.get("/library", (req, res) => {

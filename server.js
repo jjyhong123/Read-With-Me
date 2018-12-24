@@ -35,7 +35,12 @@ app.use(passport.session());
 // Set Handlebars.
 var hbs = require("handlebars")
 var exphbs = require("express-handlebars");
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main", helpers: {
+  bufferToString: (buffer) => {
+    let img64 = "data:text/plain;base64," + buffer.toString("base64")
+    return img64
+  }
+} }));
 app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB

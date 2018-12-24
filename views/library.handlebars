@@ -5,51 +5,27 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1>See my saved items:</h1>
+            <h1>Click any image to view it in the picture page.</h1>
         </div>
     </div>
 
     <br />
-    <div class="row justify-content-center">
-        <div class="col-md-8">
 
-
-            {{#each user.library}}
-            <div class="card item-card">
-
-                <div class="card-body">
-
-                    <img src="{{image}}" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px" style="float: left; margin-right: 20px;">
-                        <p>{{text}}</p>
-                        <audio controls id="polly-audio" >
-                            <source src={{pollyUrl}} type="audio/mp3" />
-                            <p>Your browser doesn't support HTML5 audio. Here is a
-                                <a href={{pollyUrl}}>link to the audio</a> instead.</p>
-                        </audio>
-                        <button class="btn btn-dark delete-btn" id="{{_id}}" style="margin-left: 60px">Remove from library</button>
-
-                    <!--div style="display: inline-block; ">
-                        <p>{{text}}</p>
-                    </div>
-
-                    <div style="display: inline-block;">
-                        <img src="{{image}}" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px" style="vertical-align: middle">
-                        <audio controls id="polly-audio" style="vertical-align: middle">
-                            <source src={{pollyUrl}} type="audio/mp3" />
-                            <p>Your browser doesn't support HTML5 audio. Here is a
-                                <a href={{pollyUrl}}>link to the audio</a> instead.</p>
-                        </audio>
-                        <button class="btn btn-dark delete-btn" id="{{_id}}" style="vertical-align: middle;">Remove from library</button>
-                    </div-->
+    <div class="row">
+        {{#each user.library}}
+        <div class="col-md-4">
+            <div id="{{_id}}" style="margin-bottom: 50px; text-align: center">
+                
+                <div class="my-wrapper">
+                    <form action="/api/review" method="post">
+                        <input type="hidden" name="id" value="{{_id}}" />
+                        <input type="image" src="{{{bufferToString image}}}" style="height: 100%; width: 100%;" alt="Submit Form" class="image" />
+                    </form>
                 </div>
-
-
-
+                <i class="fas fa-trash-alt fa-2x" style="cursor: pointer"></i>
             </div>
-            {{/each}}
-
-
         </div>
+        {{/each}}
     </div>
 
 </div>

@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     username: String,
     googleId: String,
+    mostRecentImage: Buffer,
     library: [
         {
             type: Schema.Types.ObjectId,

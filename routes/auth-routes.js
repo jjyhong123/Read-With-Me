@@ -6,10 +6,7 @@ const db = require("../models");
 // auth logout
 router.get('/logout', (req, res) => {
     req.logout();
-    db.Image.remove({})
-    .then((data) => {
-        res.redirect('/');
-    })
+    res.redirect('/');
 });
 
 // auth with google+

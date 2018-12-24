@@ -1,6 +1,6 @@
 $(document).ready(() => {
 
-  /* IMAGE THUMBNAIL STUFF */
+  // IMAGE THUMBNAIL STUFF 
   function readURL(input) {
 
     if (input.files && input.files[0]) {
@@ -8,7 +8,7 @@ $(document).ready(() => {
 
       reader.onload = function (e) {
         $('#selected-image').attr('src', e.target.result);
-        sessionStorage.setItem("imageUrl", e.target.result)
+        $('button.upload').attr('style', "display: block; margin-top: 15px")
       }
 
       reader.readAsDataURL(input.files[0]);
@@ -19,13 +19,18 @@ $(document).ready(() => {
     readURL(this);
   });
 
+  $('button.signed-in-false').click(function () {
+    $('.modal').show()
+  })
+
   /*----------------------------------------------------------------------------------*/
 
   /* LIBRARY PAGE STUFF */
-  $(".delete-btn").click(function() {
-    let itemId = this.id;
-    $.get("/db/delete/" + itemId, function() {
+  $("i.fa-trash-alt").click(function () {
+    let itemId = this.parentElement.id;
+    $.get("/db/delete/" + itemId, function () {
       location.reload()
     });
   })
+
 })
