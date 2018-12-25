@@ -56,7 +56,7 @@ router.post(
   (req, res) => {
     client.textDetection(req.file.buffer, (err, data) => {
       if (err) return res.render("picture", { user: req.user, err: "An error occurred.", picture: true })
-      if (!data.textAnnotations) return res.render("picture", { user: req.user, err: "No text detected in image.", picture: true })
+      if (!data.textAnnotations.length) return res.render("picture", { user: req.user, err: "No text detected in image.", picture: true })
       // If user is signed in, save this image buffer to database
       if (req.user) {
         db.User.findOneAndUpdate({ googleId: req.user.googleId }, { mostRecentImage: req.file.buffer }).catch(err => res.json(err))
