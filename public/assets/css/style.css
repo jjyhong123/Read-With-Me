@@ -127,14 +127,6 @@ footer {
     padding: 7.5px 0 0 0;
 }
 
-#left-side {
-    display: inline-block; 
-    width: 50%; 
-    vertical-align: middle;
-}
-
-#right-side {
-    /*display: inline-block;*/ 
-    float: right;
-    vertical-align: middle;
+#left-side #right-side {
+    display: inline-block;
 }

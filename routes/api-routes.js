@@ -13,13 +13,14 @@ const uploadImage = multer().single("image")
 // Configure AWS and Google APIs
 const client = new vision.ImageAnnotatorClient({ keyFilename: keys.google.applicationCredentials })
 const translate = new Translate({ keyFilename: keys.google.applicationCredentials });
-const polly = new AWS.Polly.Presigner();
+
 AWS.config.logger = console;
 AWS.config = new AWS.Config({
   accessKeyId: keys.amazon.accessKeyId,
   region: keys.amazon.region,
   secretAccessKey: keys.amazon.secretAccessKey
 });
+const polly = new AWS.Polly.Presigner();
 
 // Automatically parse request body as form data
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -37,6 +38,7 @@ const convertLanguageToSpeaker = (language) => {
 const handleTextToVoice = (hablante, texto, req, res, img) => {
   const { url, ...params } = { OutputFormat: "mp3", Text: texto, TextType: "text", VoiceId: hablante, url: null };
   polly.getSynthesizeSpeechUrl(params, [60 * 60 * 24 * 7], (error, url) => {
+    console.log("Error", error)
     if (error) return res.render("picture", { user: req.user, err: "Unable to generate audio.", picture: true })
     res.render("picture", { user: req.user, src: url, text: texto, img: img, picture: true })
   });

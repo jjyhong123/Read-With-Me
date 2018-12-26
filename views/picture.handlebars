@@ -15,14 +15,15 @@
         <!-- Left card -->
         <div class="card">
           <div class="card-header">Upload text-containing image</div>
-          <div class="card-body">
+          <div class="card-body" style="display: flex; justify-content: space-between; overflow: hidden">
             <!-- Left half of left card -->
             <div id="left-side">
               <h5 class="card-title">File upload</h5>
               <!-- File upload -->
               <div class="input-group">
                 <form action="/api/add" method="post" enctype="multipart/form-data">
-                  <input type="file" name="image" accept="image/*" capture="camera" id="imgInp" />
+                  <button type="button" class="btn btn-secondary" style="margin-bottom: 20px"><label for="imgInp" style="margin: 0px; cursor: pointer;">Choose file</label></button>
+                  <input type="file" name="image" accept="image/*" capture="camera" id="imgInp" style="display: none;"/>
                   <button class="btn btn-dark upload" type="submit" style="display: none;">Upload</button>
                 </form>
               </div>
@@ -61,10 +62,10 @@
                     <option value="es">Spanish (European)</option>
                     <option value="sv">Swedish</option>
                     <option value="tr">Turkish</option>
-
                   </select>
                   <input type="hidden" name="text" value="{{text}}" />
                 </div>
+
                 {{#if user}}
                 <button type="submit" class="btn btn-dark" style="margin-left: 100px;">Translate</button>
                 {{else}}
@@ -99,9 +100,9 @@
                 <input type="hidden" name="text" value="{{text}}" /> {{#if dbRedirect}}
                 <span style="margin-left: 10px;">Item successfully saved.</span>
                 {{else}}
-                <button class="btn btn-dark" type="submit" style="margin-left: 65px;">Save to library!</button>
+                <button class="btn btn-dark" type="submit" style="/*margin-left: 65px;*/">Save to library!</button>
                 {{/if}} {{else}}
-                <button type="button" class="btn btn-dark signed-in-false" style="margin-left: 65px;" data-toggle="modal" data-target="#exampleModalCenter">
+                <button type="button" class="btn btn-dark signed-in-false" style="/*margin-left: 65px;*/" data-toggle="modal" data-target="#exampleModalCenter">
                   Save to library!
                 </button>
               </form>

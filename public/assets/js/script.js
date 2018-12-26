@@ -7,7 +7,7 @@ $(document).ready(() => {
       var reader = new FileReader();
       reader.onload = function (e) {
         $('#selected-image').attr('src', e.target.result);
-        $('button.upload').attr('style', "display: block; margin-top: 15px")
+        $('button.upload').attr('style', "display: block")
       }
       reader.readAsDataURL(input.files[0]);
     }
