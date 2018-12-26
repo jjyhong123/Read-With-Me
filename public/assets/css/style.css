@@ -1,4 +1,6 @@
+/*/////////////////////////////////////////////////*/
 /* Apply to everything */
+
 html {
     height: 100%;
     box-sizing: border-box;
@@ -9,8 +11,6 @@ html {
 *:after {
   box-sizing: inherit;
 }
-
-
 
 body {
     font-family: 'Roboto Condensed', sans-serif;
@@ -61,8 +61,16 @@ footer {
     margin: 0 auto;
 }
 
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .container {
+      background-color: red;
+    }
+}
 
-/* Home page CSS */
+/*/////////////////////////////////////////////////////*/
+/* Index page CSS */
+
 #slide1 {
     color: white;
     height: 425px;
@@ -87,7 +95,9 @@ footer {
     border-style: none;
 }
 
+/*/////////////////////////////////////////////////////*/
 /* Library page CSS */
+
 .my-wrapper {
     background-color: white;
 }
@@ -96,9 +106,10 @@ footer {
     opacity: 0.2;
 }
 
+/*////////////////////////////////////////////////////*/
 /* Picture page CSS */
+
 #polly-audio {
-    /*margin: auto auto 10px auto;*/
     vertical-align: middle;
 }
 
@@ -116,4 +127,16 @@ footer {
 
 .form-inline {
     padding: 7.5px 0 0 0;
+}
+
+#left-side {
+    display: inline-block; 
+    width: 50%; 
+    vertical-align: middle;
+}
+
+#right-side {
+    /*display: inline-block;*/ 
+    float: right;
+    vertical-align: middle;
 }

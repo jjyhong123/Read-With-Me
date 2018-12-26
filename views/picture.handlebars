@@ -12,11 +12,12 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card-deck" style="margin-top: 50px">
-
+        <!-- Left card -->
         <div class="card">
           <div class="card-header">Upload text-containing image</div>
           <div class="card-body">
-            <div id="left-side" style="display: inline-block; width: 50%; vertical-align: middle;">
+            <!-- Left half of left card -->
+            <div id="left-side">
               <h5 class="card-title">File upload</h5>
               <!-- File upload -->
               <div class="input-group">
@@ -25,9 +26,9 @@
                   <button class="btn btn-dark upload" type="submit" style="display: none;">Upload</button>
                 </form>
               </div>
-
             </div>
-            <div id="right-side" style="display: inline-block; float: right; vertical-align: middle">
+            <!-- Right half of left card -->
+            <div id="right-side">
               {{#if img}}
               <img src="{{{bufferToString img}}}" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px"> {{else}}
               <img src="https://via.placeholder.com/150" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px"> {{/if}}
@@ -67,20 +68,9 @@
                 {{#if user}}
                 <button type="submit" class="btn btn-dark" style="margin-left: 100px;">Translate</button>
                 {{else}}
-                <!--button type="button" id="translateBtn" class="btn btn-dark" style="margin-left: 100px;">Translate</button-->
-
-                <!--div class="alert alert-warning alert-dismissible fade show" role="alert" style="display: none;">
-                  You must sign in to access this feature.
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div-->
-
-                <!-- Button trigger modal -->
                 <button type="button" class="btn btn-dark signed-in-false" style="margin-left: 100px;" data-toggle="modal" data-target="#exampleModalCenter">
                   Translate
                 </button>
-
                 {{/if}}
 
               </form>
