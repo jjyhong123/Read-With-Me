@@ -66,9 +66,9 @@
                 <option value="tr">Turkish</option>
               </select>
               <input type="hidden" name="text" value="{{text}}" /> {{#if user}}
-              <button type="submit" class="btn btn-dark translate" style="margin-left: 100px;">Translate</button>
+              <button type="submit" class="btn btn-dark translate" style="margin-left: 30px;">Translate</button>
               {{else}}
-              <button type="button" class="btn btn-dark signed-in-false translate" style="margin-left: 100px;" data-toggle="modal" data-target="#exampleModalCenter">
+              <button type="button" class="btn btn-dark signed-in-false translate" style="margin-left: 30px;" data-toggle="modal" data-target="#exampleModalCenter">
                 Translate
               </button>
               {{/if}}
@@ -105,9 +105,9 @@
               <input type="hidden" name="text" value="{{text}}" /> {{#if dbRedirect}}
               <span style="margin-left: 30px;">Item successfully saved.</span>
               {{else}}
-              <button class="btn btn-dark save" type="submit" style="margin-left: 0px;">Save to library!</button>
+              <button class="btn btn-dark save" type="submit">Save to library!</button>
               {{/if}} {{else}}
-              <button type="button" class="btn btn-dark signed-in-false save" style="margin-left: 0px;" data-toggle="modal" data-target="#exampleModalCenter">
+              <button type="button" class="btn btn-dark signed-in-false save" data-toggle="modal" data-target="#exampleModalCenter">
                 Save to library!
               </button>
             </form>
