@@ -1,2 +1,2 @@
 const fs = require("fs");
-fs.writeFile("./read-with-me-auth-credentials.json", process.env.google_config, (err) => {if (!err) {console.log(process.env.google_config)} else console.log(err)});
+fs.writeFile("./read-with-me-auth-credentials.json", process.env.google_config, err => console.log(`Errors during preinstall: ${err}`));
