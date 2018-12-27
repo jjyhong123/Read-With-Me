@@ -5,133 +5,137 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h3 style="text-align: center"><strong>Convert your image to lifelike speech.</strong></h3>
+      <h3 style="text-align: center">
+        <strong>Convert your image to lifelike speech.</strong>
+      </h3>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card-deck" style="margin-top: 50px">
-        <!-- Left card -->
-        <div class="card">
-          <div class="card-header">Upload text-containing image</div>
-          <div class="card-body" style="display: flex; justify-content: space-between; overflow: hidden">
-            <!-- Left half of left card -->
-            <div id="left-side">
-              <h5 class="card-title">File upload</h5>
-              <!-- File upload -->
-              <div class="input-group">
-                <form action="/api/add" method="post" enctype="multipart/form-data">
-                  <button type="button" class="btn btn-secondary" style="margin-bottom: 20px"><label for="imgInp" style="margin: 0px; cursor: pointer;">Choose file</label></button>
-                  <input type="file" name="image" accept="image/*" capture="camera" id="imgInp" style="display: none;"/>
-                  <button class="btn btn-dark upload" type="submit" style="display: none;">Upload</button>
-                </form>
-              </div>
-            </div>
-            <!-- Right half of left card -->
-            <div id="right-side">
-              {{#if img}}
-              <img src="{{{bufferToString img}}}" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px"> {{else}}
-              <img src="https://via.placeholder.com/150" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px"> {{/if}}
-            </div>
-          </div>
-
-          {{#if src}}
-          <div class="card-footer" style="text-align: center;">
-            <div style="display: inline-block;">
-              <form action="/api/translate" method="post" class="form-inline">
-                <div class="form-group">
-                  <label for="language" style="margin-right: 10px;">Select language:</label>
-                  <select class="form-control" name="targetLang" id="language">
-                    <option value="zh">Chinese (Mandarin)</option>
-                    <option value="da">Danish</option>
-                    <option value="nl">Dutch</option>
-                    <option value="en">English (US)</option>
-                    <option value="fr">French</option>
-                    <option value="hi">Hindi</option>
-                    <option value="de">German</option>
-                    <option value="is">Icelandic</option>
-                    <option value="it">Italian</option>
-                    <option value="ja">Japanese</option>
-                    <option value="ko">Korean</option>
-                    <option value="no">Norwegian</option>
-                    <option value="pl">Polish</option>
-                    <option value="pt">Portuguese (European)</option>
-                    <option value="ro">Romanian</option>
-                    <option value="ru">Russian</option>
-                    <option value="es">Spanish (European)</option>
-                    <option value="sv">Swedish</option>
-                    <option value="tr">Turkish</option>
-                  </select>
-                  <input type="hidden" name="text" value="{{text}}" />
-                </div>
-
-                {{#if user}}
-                <button type="submit" class="btn btn-dark" style="/*margin-left: 100px;*/">Translate</button>
-                {{else}}
-                <button type="button" class="btn btn-dark signed-in-false" style="/*margin-left: 100px;*/" data-toggle="modal" data-target="#exampleModalCenter">
-                  Translate
+  <div class="row" id="upload-div-row">
+    <div class="col-lg-6" id="upload-div-col">
+      <!-- Left card -->
+      <div class="card left">
+        <div class="card-header">Upload text-containing image</div>
+        <div class="card-body" style="display: flex; justify-content: space-between;">
+          <!-- Left half of left card -->
+          <div id="left-side">
+            <h5 class="card-title">File upload</h5>
+            <!-- File upload -->
+            <div class="input-group">
+              <form action="/api/add" method="post" enctype="multipart/form-data">
+                <button type="button" class="btn btn-secondary" style="margin-bottom: 30px">
+                  <label for="imgInp" style="margin: 0px; cursor: pointer;">Choose file</label>
                 </button>
-                {{/if}}
-
+                <input type="file" name="image" accept="image/*" capture="camera" id="imgInp" style="display: none;" />
+                <button class="btn btn-dark upload" type="submit" style="display: none;">Upload</button>
               </form>
             </div>
           </div>
-          {{/if}}
+          <!-- Right half of left card -->
+          <div id="right-side">
+            {{#if img}}
+            <img src="{{{bufferToString img}}}" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px"> {{else}}
+            <img src="https://via.placeholder.com/150" id="selected-image" alt="Selected image thumbnail" height="150px" width="150px"> {{/if}}
+          </div>
         </div>
 
         {{#if src}}
-        <div class="card border-success">
-          <div class="card-header">Now reading</div>
-          <div class="card-body text-success">
-            <p class="card-text">{{text}}</p>
-          </div>
-          <div class="card-footer" style="text-align: center">
-            <div style="display: inline-block">
-              <audio controls id="polly-audio">
-                <source src={{src}} type="audio/mp3" />
-                <p>Your browser doesn't support HTML5 audio. Here is a
-                  <a href={{src}}>link to the audio</a> instead.</p>
-              </audio>
-
-              {{#if user}}
-              <form action="/db/save" method="post" style="display: inline;" id="save-form">
-                <input type="hidden" name="pollyUrl" value="{{src}}" />
-                <input type="hidden" name="text" value="{{text}}" /> {{#if dbRedirect}}
-                <span style="margin-left: 10px;">Item successfully saved.</span>
-                {{else}}
-                <button class="btn btn-dark" type="submit" style="/*margin-left: 65px;*/">Save to library!</button>
-                {{/if}} {{else}}
-                <button type="button" class="btn btn-dark signed-in-false" style="/*margin-left: 65px;*/" data-toggle="modal" data-target="#exampleModalCenter">
-                  Save to library!
-                </button>
-              </form>
+        <div class="card-footer">
+          <div style="display: flex; align-items: center; justify-content: center">
+            <form action="/api/translate" method="post" style="display: flex; align-items: center; justify-content: center">
+              <select class="form-control" name="targetLang" id="language">
+                <option value="" select disabled>Select language</option>
+                <option value="zh">Chinese (Mandarin)</option>
+                <option value="da">Danish</option>
+                <option value="nl">Dutch</option>
+                <option value="en">English (US)</option>
+                <option value="fr">French</option>
+                <option value="hi">Hindi</option>
+                <option value="de">German</option>
+                <option value="is">Icelandic</option>
+                <option value="it">Italian</option>
+                <option value="ja">Japanese</option>
+                <option value="ko">Korean</option>
+                <option value="no">Norwegian</option>
+                <option value="pl">Polish</option>
+                <option value="pt">Portuguese (European)</option>
+                <option value="ro">Romanian</option>
+                <option value="ru">Russian</option>
+                <option value="es">Spanish (European)</option>
+                <option value="sv">Swedish</option>
+                <option value="tr">Turkish</option>
+              </select>
+              <input type="hidden" name="text" value="{{text}}" /> {{#if user}}
+              <button type="submit" class="btn btn-dark translate" style="margin-left: 100px;">Translate</button>
+              {{else}}
+              <button type="button" class="btn btn-dark signed-in-false translate" style="margin-left: 100px;" data-toggle="modal" data-target="#exampleModalCenter">
+                Translate
+              </button>
               {{/if}}
-            </div>
 
+            </form>
           </div>
         </div>
-        {{else}} {{#if err}}
-        <div class="card border-danger">
-          <div class="card-header">Now reading</div>
-          <div class="card-body text-danger">
-            <p class="card-text">{{err}}</p>
-          </div>
-        </div>
-
-        {{else}}
-        <div class="card">
-          <div class="card-header">Now reading</div>
-          <div class="card-body">
-            <p class="card-text">No text submitted yet.</p>
-          </div>
-        </div>
-        {{/if}} {{/if}}
-
-
+        {{/if}}
       </div>
     </div>
+
+    <div class="col-lg-6">
+      {{#if src}}
+      <div class="card right border-success">
+        <div class="card-header">Now reading</div>
+        <div class="card-body text-success">
+          <p class="card-text">{{text}}</p>
+        </div>
+        <div class="card-footer">
+          <div style="display: flex; align-items: center; justify-content: center">
+            <audio id="polly-audio">
+              <source src={{src}} type="audio/mp3" />
+              <p>Your browser doesn't support HTML5 audio. Here is a
+                <a href={{src}}>link to the audio</a> instead.</p>
+            </audio>
+            <button id="pButton" class="btn btn-dark">
+              <i class="fas fa-play"></i>
+              <i class="fas fa-pause" style="display: none"></i>
+            </button>
+
+            {{#if user}}
+            <form action="/db/save" method="post">
+              <input type="hidden" name="pollyUrl" value="{{src}}" />
+              <input type="hidden" name="text" value="{{text}}" /> {{#if dbRedirect}}
+              <span style="margin-left: 30px;">Item successfully saved.</span>
+              {{else}}
+              <button class="btn btn-dark save" type="submit" style="margin-left: 0px;">Save to library!</button>
+              {{/if}} {{else}}
+              <button type="button" class="btn btn-dark signed-in-false save" style="margin-left: 0px;" data-toggle="modal" data-target="#exampleModalCenter">
+                Save to library!
+              </button>
+            </form>
+            {{/if}}
+          </div>
+
+        </div>
+      </div>
+      {{else}} {{#if err}}
+      <div class="card right border-danger">
+        <div class="card-header">Now reading</div>
+        <div class="card-body text-danger">
+          <p class="card-text">{{err}}</p>
+        </div>
+      </div>
+
+      {{else}}
+      <div class="card right">
+        <div class="card-header">Now reading</div>
+        <div class="card-body">
+          <p class="card-text">No text submitted yet.</p>
+        </div>
+      </div>
+      {{/if}} {{/if}}
+
+    </div>
   </div>
+</div>
 
 </div>
 
@@ -156,3 +160,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  // On large devices (where cards render side-by-side), match card body heights 
+  let right = $('div.right').children("div.card-body")[0].scrollHeight;
+  let left = $('div.left').children("div.card-body")[0].scrollHeight;
+  if (right > left && window.innerWidth > 993) {
+    $('div.left').children("div.card-body").css("height", right);
+  }
+</script>

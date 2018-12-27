@@ -23,11 +23,11 @@ body {
 h1 {
     text-align: center;
     font-family: 'Walter Turncoat';
-    font-size: 50px;
+    font-size: 60px;
 }
 
 h2 {
-    font-size: 37px;
+    font-size: 42px;
 }
   
 h3 {
@@ -35,7 +35,7 @@ h3 {
 }
 
 p {
-    font-size: 25px;
+    font-size: 22px;
 }
 
 .nav-item {
@@ -61,9 +61,11 @@ footer {
     margin: 0 auto;
 }
 
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
+/*/////////////////////////////////////////////////////*/
+/* Navbar CSS */
 
+#username, #login {
+    margin-left: 50px
 }
 
 /*/////////////////////////////////////////////////////*/
@@ -93,6 +95,36 @@ footer {
     border-style: none;
 }
 
+.lang-icon.bottom {
+    display: none;
+}
+
+@media (max-width: 769px) {
+    div.features {
+        text-align: center;
+    }
+
+    .book-icon {
+        margin-bottom: 60px;
+    }
+
+    .lang-icon.top {
+        display: none;
+    }
+
+    .lang-icon.bottom {
+        display: block;
+    }
+
+    .carousel {
+        display: none;
+    }
+
+    #username, #login {
+        margin-left: 10px
+    }
+}
+
 /*/////////////////////////////////////////////////////*/
 /* Library page CSS */
 
@@ -107,26 +139,33 @@ footer {
 /*////////////////////////////////////////////////////*/
 /* Picture page CSS */
 
-#polly-audio {
-    vertical-align: middle;
-}
-
 .card-header {
     font-size: 20px;
 }
 
 .card-footer {
     min-height: 79px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center
 }
 
-#save-form {
-    vertical-align: middle;
+.card-body {
+    min-height: 190px;
 }
 
-.form-inline {
-    padding: 7.5px 0 0 0;
-}
-
-#left-side #right-side {
+#left-side, #right-side {
     display: inline-block;
+}
+
+#upload-div-row {
+    margin-top: 20px;
+}
+
+#upload-div-col {
+    margin-bottom: 20px; 
+}
+
+#pButton {
+    margin-right: 15px;
 }

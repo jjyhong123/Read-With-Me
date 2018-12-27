@@ -12,11 +12,27 @@ $(document).ready(() => {
       reader.readAsDataURL(input.files[0]);
     }
   }
-  
+
   $("#imgInp").change(function () {
     readURL(this);
   });
   //-----------------------------//
+
+  // Functionality for custom play/pause button
+  var music = document.getElementById('polly-audio');
+
+  $("#pButton").click(function () {
+    if (music.paused) {
+      music.play();
+      $(".fa-play").hide()
+      $(".fa-pause").show()
+    } else {
+      music.pause();
+      $(".fa-pause").hide()
+      $(".fa-play").show()
+    }
+  })
+  //--------------------------------------------------//
 
   // Display a modal when user tries to translate or save to library without having signed in 
   $('button.signed-in-false').click(function () {
@@ -31,5 +47,4 @@ $(document).ready(() => {
       location.reload()
     });
   })
-
 })

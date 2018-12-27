@@ -2,20 +2,20 @@
 {{> navbar-partial }}
 
 <!-- Carousel -->
-<div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel" data-interval='6000'>
+<div class="carousel slide carousel-fade" data-ride="carousel" data-interval='6000'>
   <div class="carousel-inner">
 
     <div class="carousel-item active jumbotron text-center" id="slide1">
       <div>
         <h1>Interact more richly with your world.</h1>
-        <p>You can access any text with the push of a smartphone camera button.</p>
+        <h3>Voice accessibility at the push of a smartphone camera button.</h3>
       </div>
     </div>
 
     <div class="carousel-item jumbotron text-center" id="slide3">
       <div>
         <h1>Make sense of your surroundings.</h1>
-        <p>You can demystify signs and menus using the app's translation feature.</p>
+        <h3>You can demystify signs and menus using the app's translation feature.</h3>
       </div>
     </div>
 
@@ -24,13 +24,15 @@
 
 
 <!-- How it works -->
-<div class="container">
+<div class="container features">
 
   <br>
 
   <div class="row">
     <div class="col-md-12" style="text-align: center">
-      <h2><strong>Use this app for:</strong></h2>
+      <h2>
+        <strong>Use this app for:</strong>
+      </h2>
     </div>
   </div>
 
@@ -38,29 +40,38 @@
 
   <div class="row">
 
-    <div class="col-md-8" style="display: flex; align-items: center">
+    <div class="col-md-8" style="display: flex; align-items: center;">
       <div>
-        <h3><strong>Image-to-voice conversion.</strong></h3>
+        <h3>
+          <strong>Image-to-voice conversion.</strong>
+        </h3>
         <p>Using your smartphone, simply take a picture of a sign or document and Read With Me will read it aloud to you.</p>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <img src="assets/images/card-img-1.png" alt="Book icon" style="height: 100%; width: 100%">
+    <div class="col-md-4 book-icon">
+      <img src="assets/images/card-img-1.png" alt="Book icon" style="height: 100%; width: 100%; max-height: 210px; max-width: 290px;">
     </div>
-    
+
   </div>
 
   <div class="row">
-    <div class="col-md-4">
-      <img src="assets/images/card-img-3.png" alt="Foreign language icon" style="height: 100%; width: 100%">
+    <div class="col-md-4 lang-icon top">
+      <img src="assets/images/card-img-3.png" alt="Foreign language icon" style="height: 100%; width: 100%; max-height: 210px; max-width: 290px">
     </div>
 
     <div class="col-md-8" style="display: flex; align-items: center">
       <div>
-        <h3><strong>Language-to-language translation.</strong></h3>
-        <p>Read With Me automatically detects the language and reads the text accordingly. Translate into any of the app's 19 supported languages.</p>
+        <h3>
+          <strong>Language-to-language translation.</strong>
+        </h3>
+        <p>Read With Me automatically detects the language and reads the text accordingly. Translate into any of the app's 19
+          supported languages.</p>
       </div>
+    </div>
+
+    <div class="col-md-4 lang-icon bottom">
+      <img src="assets/images/card-img-3.png" alt="Foreign language icon" style="height: 100%; width: 100%; max-height: 210px; max-width: 290px">
     </div>
 
   </div>

@@ -38,7 +38,6 @@ const convertLanguageToSpeaker = (language) => {
 const handleTextToVoice = (hablante, texto, req, res, img) => {
   const { url, ...params } = { OutputFormat: "mp3", Text: texto, TextType: "text", VoiceId: hablante, url: null };
   polly.getSynthesizeSpeechUrl(params, [60 * 60 * 24 * 7], (error, url) => {
-    console.log("Error", error)
     if (error) return res.render("picture", { user: req.user, err: "Unable to generate audio.", picture: true })
     res.render("picture", { user: req.user, src: url, text: texto, img: img, picture: true })
   });

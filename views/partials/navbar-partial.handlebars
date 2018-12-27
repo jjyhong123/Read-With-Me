@@ -27,7 +27,7 @@
         </li>
 
         {{#if user}}
-        <li class="nav-item nav-link" style="margin-left: 50px">
+        <li class="nav-item nav-link" id="username">
           Welcome, {{user.username}}!
         </li>
         <li class="nav-item">
@@ -36,7 +36,7 @@
         </li>
 
         {{else}}
-        <li class="nav-item" style="margin-left: 50px; cursor: pointer">
+        <li class="nav-item" id="login" style="cursor: pointer">
           <a class="nav-link" href="/auth/google"> Log in
           </a>
         </li>
