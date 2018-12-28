@@ -19,6 +19,7 @@ $(document).ready(() => {
   //-----------------------------//
 
   // Functionality for custom play/pause button
+  /*
   var music = document.getElementById('polly-audio');
 
   $("#pButton").click(function () {
@@ -32,6 +33,8 @@ $(document).ready(() => {
       $(".fa-play").show()
     }
   })
+  */
+ 
   //--------------------------------------------------//
 
   // Display a modal when user tries to translate or save to library without having signed in 

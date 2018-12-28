@@ -89,14 +89,17 @@
         </div>
         <div class="card-footer">
           <div style="display: flex; align-items: center; justify-content: center">
-            <audio id="polly-audio">
-              <source src={{src}} type="audio/mp3" />
-              <p>Your browser doesn't support HTML5 audio. Here is a
-                <a href={{src}}>link to the audio</a> instead.</p>
-            </audio>
-            <button id="pButton" class="btn btn-dark">
+
+            <button id="play-btn" class="btn btn-dark" data-audio="{{src}}">
               <i class="fas fa-play"></i>
-              <i class="fas fa-pause" style="display: none"></i>
+            </button>
+
+            <button id="pause-btn" class="btn btn-dark" style="display: none">
+              <i class="fas fa-pause"></i>
+            </button>
+
+            <button id="resume-btn" class="btn btn-dark" style="display: none">
+              <i class="fas fa-play"></i>
             </button>
 
             {{#if user}}
@@ -168,4 +171,100 @@
   if (right > left && window.innerWidth > 993) {
     $('div.left').children("div.card-body").css("height", right);
   }
+
+  // Audio
+  var cassettePlayer;
+
+  $("#play-btn").on("click", function () {
+    /*
+    $(this).hide();
+    $("#pause-btn").show();
+    */
+
+    cassettePlayer = new Audio("")
+    cassettePlayer.src = $(this).data('audio');
+    cassettePlayer.pause();
+    cassettePlayer.load();
+    cassettePlayer.play();
+  })
+
+  $("#pause-btn").on("click", function () {
+    $(this).hide();
+    $("#resume-btn").show();
+    cassettePlayer.pause();
+  })
+
+  $("#resume-btn").on("click", function () {
+    $(this).hide();
+    $("#pause-btn").show();
+    cassettePlayer.play();
+  })
+
+  /*
+  function cassettePlay(cassette) {
+    var cassettePlayer = new Audio("");
+    cassettePlayer.src = cassette;
+    cassettePlayer.pause();
+    cassettePlayer.load();
+    cassettePlayer.play();
+  }
+
+  $('#pButton').on('click', function (e) {
+    e.preventDefault();
+    var cassette = $(this).data('audio');
+    cassettePlay(cassette);
+  });
+  */
+
+  // On pButton click, 
+  // if first click (data-state="new"), generate new Audio and play (set data-state="playing")
+  // if playing (data-state="playing"), pause (set data-state="paused") 
+  // if paused (data-state="paused"), play (set data-state="playing")
+  // if finished, reset (set data-state="new")
+
+
+
+  /*
+  $('#pButton').on('click', function () {
+    let state = $(this).data('state')
+    let cassettePlayer;
+
+    switch (state) {
+      case "new":
+        $(this).attr('data-state', 'playing')
+        cassettePlayer = new Audio("");
+        cassettePlayer.src = $(this).data('audio');
+        cassettePlayer.pause();
+        cassettePlayer.load();
+        cassettePlayer.play();
+        setTimeout(() => {
+          cassettePlayer.pause();
+        }, 2000)
+        break;
+      case "playing":
+        $(this).attr('data-state', 'paused')
+        cassettePlayer.pause();
+        break;
+      case "paused":
+        $(this).attr('data-state', 'playing')
+        cassettePlayer.play();
+        break;
+      case "done":
+        
+        break;
+    }
+    
+    function cassettePlay(cassette) {
+      var cassettePlayer = new Audio("");
+      cassettePlayer.src = cassette;
+      cassettePlayer.pause();
+      cassettePlayer.load();
+      cassettePlayer.play();
+    }
+    
+  });
+  
+  $(".fa-play").hide()
+  $(".fa-pause").show()
+  */
 </script>
