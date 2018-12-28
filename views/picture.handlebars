@@ -23,7 +23,7 @@
             <!-- File upload -->
             <div class="input-group">
               <form action="/api/add" method="post" enctype="multipart/form-data">
-                <button type="button" class="btn btn-secondary" style="margin-bottom: 30px">
+                <button type="button" class="btn btn-secondary" style="margin-bottom: 15px">
                   <label for="imgInp" style="margin: 0px; cursor: pointer;">Choose file</label>
                 </button>
                 <input type="file" name="image" accept="image/*" capture="camera" id="imgInp" style="display: none;" />
@@ -40,6 +40,7 @@
         </div>
 
         {{#if src}}
+        <!-- Left card footer -->
         <div class="card-footer">
           <div style="display: flex; align-items: center; justify-content: center">
             <form action="/api/translate" method="post" style="display: flex; align-items: center; justify-content: center">
@@ -66,13 +67,12 @@
                 <option value="tr">Turkish</option>
               </select>
               <input type="hidden" name="text" value="{{text}}" /> {{#if user}}
-              <button type="submit" class="btn btn-dark translate" style="margin-left: 30px;">Translate</button>
+              <button type="submit" class="btn btn-dark translate" style="margin-left: 20px;">Translate</button>
               {{else}}
-              <button type="button" class="btn btn-dark signed-in-false translate" style="margin-left: 30px;" data-toggle="modal" data-target="#exampleModalCenter">
+              <button type="button" class="btn btn-dark signed-in-false translate" style="margin-left: 20px;" data-toggle="modal" data-target="#exampleModalCenter">
                 Translate
               </button>
               {{/if}}
-
             </form>
           </div>
         </div>
@@ -80,36 +80,48 @@
       </div>
     </div>
 
+    <!-- Right card -->
     <div class="col-lg-6">
       {{#if src}}
+      <!-- Displays when text-containing image is successfully processed -->
       <div class="card right border-success">
         <div class="card-header">Now reading</div>
+        <!-- Detected text -->
         <div class="card-body text-success">
           <p class="card-text">{{text}}</p>
         </div>
+        <!-- Footer -->
         <div class="card-footer">
           <div style="display: flex; align-items: center; justify-content: center">
+            <!-- Audio button -->
+            <audio loop id="polly-audio">
+              <source src={{src}} type="audio/mp3" />
+              <p>Your browser doesn't support HTML5 audio. Here is a
+                <a href={{src}}>link to the audio</a> instead.</p>
+            </audio>
 
-            <button id="play-btn" class="btn btn-dark" data-audio="{{src}}">
+            <!-- Play button (gets hidden when audio is playing) -->
+            <button id="play-btn" class="btn btn-secondary" style="margin-right: 20px">
               <i class="fas fa-play"></i>
             </button>
 
-            <button id="pause-btn" class="btn btn-dark" style="display: none">
+            <!-- Pause button (gets hidden when audio is paused) -->
+            <button id="pause-btn" class="btn btn-secondary" style="margin-right: 20px; display: none">
               <i class="fas fa-pause"></i>
             </button>
 
-            <button id="resume-btn" class="btn btn-dark" style="display: none">
-              <i class="fas fa-play"></i>
-            </button>
-
             {{#if user}}
+            <!-- Save to database section -->
             <form action="/db/save" method="post">
               <input type="hidden" name="pollyUrl" value="{{src}}" />
               <input type="hidden" name="text" value="{{text}}" /> {{#if dbRedirect}}
-              <span style="margin-left: 30px;">Item successfully saved.</span>
+              <!-- Displays upon page re-render after saving an item to database -->
+              <span>Item successfully saved.</span>
               {{else}}
+              <!-- Displays when item has not been saved yet -->
               <button class="btn btn-dark save" type="submit">Save to library!</button>
               {{/if}} {{else}}
+              <!-- Displays when user is not signed in -->
               <button type="button" class="btn btn-dark signed-in-false save" data-toggle="modal" data-target="#exampleModalCenter">
                 Save to library!
               </button>
@@ -120,6 +132,7 @@
         </div>
       </div>
       {{else}} {{#if err}}
+      <!-- Displays when error occurs in processing image -->
       <div class="card right border-danger">
         <div class="card-header">Now reading</div>
         <div class="card-body text-danger">
@@ -128,10 +141,11 @@
       </div>
 
       {{else}}
+      <!-- Displays when user hasn't submitted an image yet -->
       <div class="card right">
         <div class="card-header">Now reading</div>
         <div class="card-body">
-          <p class="card-text">No text submitted yet.</p>
+          <p class="card-text">No image uploaded yet.</p>
         </div>
       </div>
       {{/if}} {{/if}}
@@ -140,11 +154,7 @@
   </div>
 </div>
 
-</div>
-
-{{> footer-partial }}
-
-<!-- Modal -->
+<!-- Modal (displays when a guest tries to access a "members only" feature) -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -164,6 +174,10 @@
   </div>
 </div>
 
+<!-- Footer -->
+{{> footer-partial }}
+
+<!-- Javascript for library page -->
 <script>
   // On large devices (where cards render side-by-side), match card body heights 
   let right = $('div.right').children("div.card-body")[0].scrollHeight;
@@ -172,99 +186,19 @@
     $('div.left').children("div.card-body").css("height", right);
   }
 
-  // Audio
-  var cassettePlayer;
+  // Audio button functionality
+  let player = document.getElementById("polly-audio");
 
   $("#play-btn").on("click", function () {
-    /*
-    $(this).hide();
-    $("#pause-btn").show();
-    */
-
-    cassettePlayer = new Audio("")
-    cassettePlayer.src = $(this).data('audio');
-    cassettePlayer.pause();
-    cassettePlayer.load();
-    cassettePlayer.play();
+    $(this).hide()
+    $("#pause-btn").show()
+    player.play()
   })
 
   $("#pause-btn").on("click", function () {
-    $(this).hide();
-    $("#resume-btn").show();
-    cassettePlayer.pause();
+    $(this).hide()
+    $("#play-btn").show()
+    player.pause()
   })
 
-  $("#resume-btn").on("click", function () {
-    $(this).hide();
-    $("#pause-btn").show();
-    cassettePlayer.play();
-  })
-
-  /*
-  function cassettePlay(cassette) {
-    var cassettePlayer = new Audio("");
-    cassettePlayer.src = cassette;
-    cassettePlayer.pause();
-    cassettePlayer.load();
-    cassettePlayer.play();
-  }
-
-  $('#pButton').on('click', function (e) {
-    e.preventDefault();
-    var cassette = $(this).data('audio');
-    cassettePlay(cassette);
-  });
-  */
-
-  // On pButton click, 
-  // if first click (data-state="new"), generate new Audio and play (set data-state="playing")
-  // if playing (data-state="playing"), pause (set data-state="paused") 
-  // if paused (data-state="paused"), play (set data-state="playing")
-  // if finished, reset (set data-state="new")
-
-
-
-  /*
-  $('#pButton').on('click', function () {
-    let state = $(this).data('state')
-    let cassettePlayer;
-
-    switch (state) {
-      case "new":
-        $(this).attr('data-state', 'playing')
-        cassettePlayer = new Audio("");
-        cassettePlayer.src = $(this).data('audio');
-        cassettePlayer.pause();
-        cassettePlayer.load();
-        cassettePlayer.play();
-        setTimeout(() => {
-          cassettePlayer.pause();
-        }, 2000)
-        break;
-      case "playing":
-        $(this).attr('data-state', 'paused')
-        cassettePlayer.pause();
-        break;
-      case "paused":
-        $(this).attr('data-state', 'playing')
-        cassettePlayer.play();
-        break;
-      case "done":
-        
-        break;
-    }
-    
-    function cassettePlay(cassette) {
-      var cassettePlayer = new Audio("");
-      cassettePlayer.src = cassette;
-      cassettePlayer.pause();
-      cassettePlayer.load();
-      cassettePlayer.play();
-    }
-    
-  });
-  
-  $(".fa-play").hide()
-  $(".fa-pause").show()
-  */
 </script>

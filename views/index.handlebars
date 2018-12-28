@@ -1,24 +1,20 @@
 <!-- Navbar -->
 {{> navbar-partial }}
 
+<!-- Static jumbotron (displays on mobile devices only) -->
+<div class="jumbotron text-center static">
+  {{> jumbotron-content-partial }}
+</div>
+
 <!-- Carousel -->
 <div class="carousel slide carousel-fade" data-ride="carousel" data-interval='6000'>
   <div class="carousel-inner">
-
     <div class="carousel-item active jumbotron text-center" id="slide1">
-      <div>
-        <h1>Interact more richly with your world.</h1>
-        <h3>Voice accessibility at the push of a smartphone camera button.</h3>
-      </div>
+      {{> jumbotron-content-partial }}
     </div>
-
-    <div class="carousel-item jumbotron text-center" id="slide3">
-      <div>
-        <h1>Make sense of your surroundings.</h1>
-        <h3>You can demystify signs and menus using the app's translation feature.</h3>
-      </div>
+    <div class="carousel-item jumbotron text-center" id="slide2">
+      {{> jumbotron-content-partial }}
     </div>
-
   </div>
 </div>
 
@@ -26,17 +22,13 @@
 <!-- How it works -->
 <div class="container features">
 
-  <br>
-
-  <div class="row">
+  <div class="row heading">
     <div class="col-md-12" style="text-align: center">
       <h2>
-        <strong>Use this app for:</strong>
+        Key features
       </h2>
     </div>
   </div>
-
-  <br>
 
   <div class="row">
 

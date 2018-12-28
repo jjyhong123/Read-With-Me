@@ -72,23 +72,28 @@ footer {
 /* Index page CSS */
 
 #slide1 {
-    color: white;
-    height: 425px;
-    padding-top: 115px;
-    background-position: 50% 22%;
-    background-repeat: no-repeat;
-    background-size: 100%;
+    background-position: 50% 7%;
     background-image: url('/assets/images/menu-1.png')
 }
 
-#slide3 {
+#slide2 {
+    background-position: 50% 65%;
+    background-image: url('/assets/images/tokyo-1.png')
+}
+
+.jumbotron.carousel-item {
     color: white;
     height: 425px;
-    padding-top: 115px;
-    background-position: 50% 65%;
     background-repeat: no-repeat;
     background-size: 100%;
-    background-image: url('/assets/images/tokyo-1.png')
+    padding-top: 95px;
+}
+
+.jumbotron.static {
+    background-image: url('/assets/images/tokyo-1.png');
+    background-position: 50% 65%;
+    color: white;
+    background-size: cover;
 }
 
 .home-card {
@@ -97,6 +102,14 @@ footer {
 
 .lang-icon.bottom {
     display: none;
+}
+
+.jumbotron.static {
+    display: none;
+}
+
+div.features> div.heading {
+    margin-bottom: 60px;
 }
 
 @media (max-width: 769px) {
@@ -123,6 +136,11 @@ footer {
     #username, #login {
         margin-left: 10px
     }
+
+    .jumbotron.static {
+        display: block;
+    }
+    
 }
 
 /*/////////////////////////////////////////////////////*/
@@ -165,9 +183,3 @@ footer {
 #upload-div-col {
     margin-bottom: 20px; 
 }
-
-/*
-#pButton {
-    margin-right: 30px;
-}
-*/
