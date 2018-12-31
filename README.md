@@ -1,17 +1,15 @@
 <p align="center"><img src="https://lh3.googleusercontent.com/yW1Iz7F8wlgoaJtkUra-OtudbPl1zEX3BKtdzW76DLxvkxKDqFS59PKwNidY4a0FRgJWo_kzXWNjtxPFutThz5-Vs0FfwnjR7v_1xDzxzptgyHk62dF00ZQ-hE6hXH5fMpSoelfjj6gi_fYuUIvGu0jhiALFWS0BtjnDnMMILOlaQcfhJOVs0Vi-qjHH3YmfiGsCBqQEz2nJOhrVC1sFIoHJaVHnjDiOw0PUq32SB6nhyfv1S_pNlU2JCo-zdNBtqzSXJSDFyhx9lp1J9kFOKIwhYZZpXS9eZiXOkhDTwf5AmbB0l7a4rxlUFjJfPJwd5LfvMAmLjwlJtk4lXPXhtQ2Wtcx9q8TXNTIJBy4UDbfD2zZZVTp7B-Fy5TWlC-2QzkqIIbl9vaSqsqq0q6mNLKDP_ijh98EFjWVEPw_vDsbyYWO_mUduf_nQRgq0MdaUO9XlwXUKK8ocrML7nvmvpstQnqDeqACQc2FPsYChTid3vzFMPN8q1PYs46IuzzCmF67ZlwHAP4uIznrdOFUTS_lrigG15TdWCwVBVn2H8iczDxk_r4WyqD_7qlEaXCuIwuyEqhflyV72xFsJENpZ6MUAZoWsm0s2Mp-UQEOFwYC-SSVL-q7wF_Q8Y8lgSqNol6ytQ8zcF3-TPXURFR9vy7CmcpjAWHANwftJZ8cTzOx1KLaBGDCXjGw9PGdKEQES_YyCghRhlY4x2Ayj=w425-h172-no" alt="Read With Me logo"></p>
 
-<!-- ![Read With Me logo](public/assets/images/logo3.png?raw=true) -->
-
 # Motivation
-Imagine recovering from a stroke to find yourself unable to decipher even the simplest of words on paper, even though you can still understand when spoken to. Or that you move to a foreign country for work-related reasons and find yourself bewildered by the signs and menus.   
+Imagine recovering from a stroke to discover that you are suddenly unable to read even the simplest of words, or travelling to a foreign country and finding yourself overwhelmed by the seemingly indecipherable signs and menus. Or that you simply cannot see the words clearly enough because of worsening eyesight. 
 
-I wanted to develop an app that could be used by members of the low-vision community, children/adults with reading differences, or those traveling/living abroad. With this app, a user can take a picture of a sign, document, or any other text and the app will convert the textual content into clear and comprehensible speech. 
+I wanted to develop an app that could be used by members of the low-vision community, children/adults encountering reading difficulties, or those travelling/living abroad. With this app, a user can take a picture of a sign, document, or any other text and the app will convert the textual content into clear and comprehensible speech. 
 
 # Technology/Frameworks Used
 ## APIs
-* Google Translate
-* Google Vision
-* Amazon Polly
+* Google Translate (docs [here](https://cloud.google.com/translate/docs/))
+* Google Vision (docs [here](https://cloud.google.com/vision/docs/))
+* Amazon Polly (docs [here](https://aws.amazon.com/polly/developers/#documentation))
 
 ## Templating Engine
 * Handlebars
@@ -25,24 +23,33 @@ I wanted to develop an app that could be used by members of the low-vision commu
 ## Front-end Framework
 * Bootstrap
 
+## Middleware
+* Passport (for Google authentication)
+* Multer (for uploading images)
+
 # Usage
-The app is mobile-responsive. To unlock all the features of the app, it is recommended that you access the app on your mobile device. The live app is available [here](https://hidden-bastion-70636.herokuapp.com/).  
+The app is mobile-responsive. To test out all the features of the app (namely the image upload via camera feature), it is recommended that you use your mobile device to access the app, which is live and running [here](https://hidden-bastion-70636.herokuapp.com/).  
 
 ## On mobile (recommended)
-Sign in using your Google account, then go to the picture page. Here, you can take a picture of text with your smartphone camera directly. Upon submission, the app will return the text transcription and the audio narration. From here, you can translate the text and audio into another language or save the image into your library. (If you didn't sign in and try to access either feature, you will get a message prompting you to first sign in.)
+Sign in using your Google account, then go to the picture page. Here, you can take a picture of text with your smartphone camera. (The text can be in any of the 19 supported languages included in the dropdown list.) Upon image submission, the app will return the text transcription and audio narration. From here, you can translate the text and audio into another language or save the image into your library. (If you didn't sign in and try to access either feature, you will get a message prompting you to first sign in.)
+
+On the library page, you will see all the images you've saved. Clicking on an image will redirect you to the picture page and redisplay the image's text and audio. Clicking on the trash icon below an image will remove it from your library.
 
 ## On PC
 Same as on mobile, but instead of being able to take a picture directly, you are able to upload an image from your local filesystem. 
 
 ## Tips
-For better results:
-* Make sure text is within 90 degrees of the horizontal axis of the picture
-* Avoid highly stylized fonts
+The text detection is powered by the Google Vision API. For better results:
+* Make sure the text you wish to capture is within 90 degrees of the horizontal axis of the picture.
+* Multi-column layouts are not supported.
+* Avoid highly stylized fonts.
 
 Some things to note when using on mobile:
-* On iOS devices, pictures taken in portrait orientation will display rotated clockwise 90 degrees on the library page. Take pictures in landscape orientation so that they display properly on the library page. 
-* Due to a bug inherent to the HTML5 audio element when displayed on iOS, the generated audio file will only play once after which point the audio button becomes unresponsive. To play the audio again, you will need to refresh the page.
+* On iOS devices, pictures taken in portrait orientation will display rotated clockwise 90 degrees on the library page. 
+* Due to a bug inherent to the HTML5 audio element, the generated audio file will only play once, after which point the audio button becomes unresponsive. To play the audio again, you will need to refresh the page.
 
+# Demo
+Demo here
 
 # Installation/Configuration
 If you need to run the code on your local machine (e.g., to make contributions), begin by navigating to the root directory of the cloned project and installing dependencies:
@@ -55,10 +62,10 @@ This app uses environment variables. Below are the variables used in the env fil
 ```
 google_clientID=[url]
 google_clientSecret=[string]
-session_cookieKey=[string]
+session_cookieKey=[string] // This is used can be any string you'd like
 
 google_config=[json]
-google_applicationCredentials=./read-with-me-auth-credentials.json
+google_applicationCredentials=./read-with-me-auth-credentials.json // Don't change this
 
 amazon_accessKeyId=[string]
 amazon_region=[region]
@@ -104,13 +111,5 @@ foobar.pluralize('goose') # returns 'geese'
 foobar.singularize('phenomena') # returns 'phenomenon'
 ```
 
-# Demo
-Demo here
-
 # Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-# License
-[MIT](https://choosealicense.com/licenses/mit/)
+Pull requests are welcome.
