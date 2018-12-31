@@ -1,4 +1,6 @@
-![Read With Me logo](public/assets/images/logo3.png?raw=true)
+<div style="display: flex; justify-content: center;"><img src="https://lh3.googleusercontent.com/FnfKvAwGy6SK92beJSCIb4BYOyq3MFVQIns1E_LM5HtfpVTBt_2KnxT-yCigpiVTBAPQ0mH6isOsYZYjp-_25A5c96EuTwa5vDs8xkw11gBVRWYr9SKDuvVXVSqE8bLRYlr-1AWJFS9UH1D14c3FuKiNUZu_gG7gUdLqwLvRAOOngeslwE0MQp22_OJDmPFvzyTVb_PsQUvkU__iCaHIQ9zhZEiQ2EwlprHr1HdDT0w2IMYmtrtJJT_p5w8-VaCjv-nPnYAaJCEIlE_ZhzZpQcDbEiVoOGv7QUwSJovW9V4sLayMJ4KMx8sWmZ8MdvMbYwRMbzwsiZNx0wXoRe2VqK2f8o_vRm1KTXb-B-njeIvvneV1_XL2zZjzHoCW7LG7s6XmdER5NpbF5aS28dYr6bi1tvbkuF4cQSWSIxplrQKy3PKhQYfWIvbrzC1wTD3ZZeJKLt6gpBNvfCEh6lopRcpL5qWyqRwqQm8s16wb6IEnO-KFRy4hFLZeYJ-6ljRwlAvLczlUup1jyX4ono2vRUz2MKGXSIC1g2xEEz5ZLWOStj70rDLGH8aEZdrVkYelubx6z_v-4VgbGozLhLfj1EeoVk6SRFus3BK8B6_0EDOvgw0fotd05erMoC8AqazFLhyIO3KAIw3Z0Jf-25qPh8n-4Z5IA9OuhdeCjbueN4onalDpimIDKQKossxjN3KpS3uJX6PFjYz-Zy3g=w425-h172-no" alt="Read With Me logo"></div>
+
+<!-- ![Read With Me logo](public/assets/images/logo3.png?raw=true) -->
 
 # Motivation
 Imagine recovering from a stroke to find yourself unable to decipher even the simplest of words on paper, even though you can still understand when spoken to. Or that you move to a foreign country for work-related reasons and find yourself bewildered by the signs and menus.   
