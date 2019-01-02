@@ -28,7 +28,7 @@ I wanted to develop an app that could be used by members of the low-vision commu
 * Multer (for uploading images)
 
 # Usage
-The app is mobile-responsive. To test out all the features of the app (namely the image upload via camera feature), it is recommended that you use your mobile device to access the app, which is live and running [here](https://hidden-bastion-70636.herokuapp.com/).  
+The app is mobile-responsive. To ensure that you get to test out all features (namely the image upload via camera feature), it is recommended that you use your mobile device to access the app, which is live and running [here](https://hidden-bastion-70636.herokuapp.com/).  
 
 ## On mobile (recommended)
 Sign in using your Google account, then go to the picture page. Here, you can take a picture of text with your smartphone camera. (The text can be in any of the 19 supported languages included in the dropdown list.) Upon image submission, the app will return the text transcription and audio narration. From here, you can translate the text and audio into another language or save the image into your library. (If you didn't sign in and try to access either feature, you will get a message prompting you to first sign in.)
@@ -36,7 +36,10 @@ Sign in using your Google account, then go to the picture page. Here, you can ta
 On the library page, you will see all the images you've saved. Clicking on an image will redirect you to the picture page and redisplay the image's text and audio. Clicking on the trash icon below an image will remove it from your library.
 
 ## On PC
-Same as on mobile, but instead of being able to take a picture directly, you are able to upload an image from your local filesystem. 
+Same as on mobile, but instead of being able to take a picture directly, you are able to upload an image from your local filesystem. Here are some sample images you can save and use when trying the app:
+
+![Sample image 1](readme_images/jp4.gif)
+![Sample image 2](readme_images/fr2.jpg)
 
 ## Tips
 The text detection is powered by the Google Vision API. For better results:
@@ -48,8 +51,31 @@ Some things to note when using on mobile:
 * On iOS devices, pictures taken in portrait orientation will display rotated clockwise 90 degrees on the library page. 
 * Due to a bug inherent to the HTML5 audio element, the generated audio file will only play once, after which point the audio button becomes unresponsive. To play the audio again, you will need to refresh the page.
 
-# Demo
-Demo here
+# Demo (on mobile)
+
+## Part 1: Image capture
+![Gif 1](readme_images/gif1.gif)
+
+<br>
+
+## Part 2: Upload image and view results
+![Gif 2](readme_images/gif2.gif)
+
+<br>
+
+## Part 3: Language translation, save image to library
+![Gif 3](readme_images/gif3.gif)
+
+<br>
+
+## Part 4: View saved image in library
+![Gif 4](readme_images/gif4.gif)
+
+<br>
+
+## Part 5: Remove image from library
+![Gif 5](readme_images/gif5.gif)
+
 
 # Installation/Configuration
 If you need to run the code on your local machine (e.g., to make contributions), begin by navigating to the root directory of the cloned project and installing dependencies:
@@ -62,10 +88,10 @@ This app uses environment variables. Below are the variables used in the env fil
 ```
 google_clientID=[url]
 google_clientSecret=[string]
-session_cookieKey=[string] // This is used can be any string you'd like
+session_cookieKey=[string]
 
 google_config=[json]
-google_applicationCredentials=./read-with-me-auth-credentials.json // Don't change this
+google_applicationCredentials=./read-with-me-auth-credentials.json
 
 amazon_accessKeyId=[string]
 amazon_region=[region]
@@ -76,16 +102,19 @@ In the snippet above, I have organized the env variables into three groups. The 
 
 The first and second groups of keys can be obtained by [creating a new Google Cloud Platform (GCP) account](https://console.cloud.google.com/getting-started) and creating a new project. Once your project has been created, open the left sidebar menu and click on API & Services, and then Credentials. 
 
-Click on the blue Create credentials button and select OAuth client ID to set up authentication. Select web application and you will then be taken to a page with your client ID and secret. Copy these values and assign them to the google_clientID and google_clientSecret variables in your env file. Returning to the page, you are prompted to enter a Javascript origin and a redirect URI. Set these to http://localhost:3000 and http://localhost:3000/auth/google/redirect, respectively, to complete the authentication setup. The session_cookieKey variable in the env file can be set to any string you'd like.
+## Environment variables for Google authentication (OAuth)
+Click on the blue Create credentials button and select OAuth client ID. Select web application and you will then be taken to a page with your client ID and secret. On the same page, you are prompted to enter a Javascript origin and a redirect URI. Set these to http://localhost:3000 and http://localhost:3000/auth/google/redirect, respectively, to complete the authentication setup. The remaining session_cookieKey variable in the env file can be set to whatever string you'd like. It is used to create the coookie which stores information about the authenticated user.
 
-Once you return the Credentials page, click on the Create credentials button again and this time select Service account key. Select JSON and click on Create, which will create the JSON file containing your credentials. Open this file to examine the contents. We need to assign this JSON to the google_config variable in our env file, but we first have to format it to remove the spaces. You can do this manually, or you can paste this one-liner 
+## Environment variables for access to Vision and Translate APIs
+Return to the Credentials page and click on the Create credentials button again, this time selecting Service account key. Select JSON and click on Create, which will create the JSON file containing your credentials. You need to assign the contents of this file to the google_config variable in the env file, but you first have to format the JSON to remove the spaces. To do so, paste the one-liner 
 
 ```javascript 
 console.log(JSON.stringify([JSON_KEY]));
 ```
-into a throwaway Javascript file (replacing [JSON_KEY] with your JSON, of course), run the file in Node, and paste the stringified JSON for google_config in your env file if you're in a hurry. 
+into a new Javascript file (replacing [JSON_KEY] with your JSON), run the file in Node, and assign the output (which should be the same JSON without spaces) to google_config in your env file.
 
-The final set of keys can be obtained by [creating a new Amazon Web Services account](https://aws.amazon.com/console/). On the AWS Management Console page, search for IAM in the search bar and select. On the left sidebar, select Users and upon redirect, click the Add user button. For Select AWS access type on page 1, select Programmatic access and use the default settings for the remaining pages. Once the user is created, select it and click the Security credentials tab on the Summary page. Click the Create access key button, and assign the resulting values to amazon_accessKeyId and amazon_secretAccessKey in your env file. The variable amazon_region can be found in your address bar and corresponds to the region you used during your account creation (e.g., "us-west-2").
+## Environment variables for access to Polly API
+Start by [creating a new Amazon Web Services account](https://aws.amazon.com/console/). On the AWS Management Console page, search for IAM in the search bar and select. On the left sidebar, select Users and upon redirect, click the Add user button. For Select AWS access type on page 1, select Programmatic access and use default settings for the remaining pages. Once the user is created, select it and click the Security credentials tab on the Summary page. Click the Create access key button, and assign the resulting values to amazon_accessKeyId and amazon_secretAccessKey in your env file. The variable amazon_region can be found in your address bar and corresponds to the region you selected during account creation (e.g., "us-west-2").
 
 You're almost there! Now that you have all your environment variables defined, run the following in your terminal:
 
@@ -93,23 +122,7 @@ You're almost there! Now that you have all your environment variables defined, r
 npm run-script preinstall
 ```
 
-This will create a new file containing your Google JSON credentials at the root directory so it can be accessed by the code.  
-
-You're all done! Now let's get this baby fired up!
-
-```bash
-npm start
-```
-
-# Code example
-
-```python
-import foobar
-
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
-```
+This will create a new file containing your Google JSON credentials at the root directory so it can be accessed by the app.  
 
 # Contributing
 Pull requests are welcome.
