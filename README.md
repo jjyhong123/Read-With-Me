@@ -1,7 +1,7 @@
 <p align="center"><img src="https://lh3.googleusercontent.com/yW1Iz7F8wlgoaJtkUra-OtudbPl1zEX3BKtdzW76DLxvkxKDqFS59PKwNidY4a0FRgJWo_kzXWNjtxPFutThz5-Vs0FfwnjR7v_1xDzxzptgyHk62dF00ZQ-hE6hXH5fMpSoelfjj6gi_fYuUIvGu0jhiALFWS0BtjnDnMMILOlaQcfhJOVs0Vi-qjHH3YmfiGsCBqQEz2nJOhrVC1sFIoHJaVHnjDiOw0PUq32SB6nhyfv1S_pNlU2JCo-zdNBtqzSXJSDFyhx9lp1J9kFOKIwhYZZpXS9eZiXOkhDTwf5AmbB0l7a4rxlUFjJfPJwd5LfvMAmLjwlJtk4lXPXhtQ2Wtcx9q8TXNTIJBy4UDbfD2zZZVTp7B-Fy5TWlC-2QzkqIIbl9vaSqsqq0q6mNLKDP_ijh98EFjWVEPw_vDsbyYWO_mUduf_nQRgq0MdaUO9XlwXUKK8ocrML7nvmvpstQnqDeqACQc2FPsYChTid3vzFMPN8q1PYs46IuzzCmF67ZlwHAP4uIznrdOFUTS_lrigG15TdWCwVBVn2H8iczDxk_r4WyqD_7qlEaXCuIwuyEqhflyV72xFsJENpZ6MUAZoWsm0s2Mp-UQEOFwYC-SSVL-q7wF_Q8Y8lgSqNol6ytQ8zcF3-TPXURFR9vy7CmcpjAWHANwftJZ8cTzOx1KLaBGDCXjGw9PGdKEQES_YyCghRhlY4x2Ayj=w425-h172-no" alt="Read With Me logo"></p>
 
 # Motivation
-Imagine recovering from a stroke to discover that you are suddenly unable to read even the simplest of words, or travelling to a foreign country and finding yourself overwhelmed by the seemingly indecipherable signs and menus. Or that you simply cannot see the words clearly enough because of worsening eyesight. 
+Imagine recovering from a stroke to discover that you are suddenly unable to read all but the simplest of words, or travelling to a foreign country and finding yourself overwhelmed by the seemingly indecipherable signs and menus. Or that due to worsening eyesight, it's becoming increasingly difficult to even see the words around you.
 
 I wanted to develop an app that could be used by members of the low-vision community, children/adults encountering reading difficulties, or those travelling/living abroad. With this app, a user can take a picture of a sign, document, or any other text and the app will convert the textual content into clear and comprehensible speech. 
 
@@ -38,11 +38,11 @@ On the library page, you will see all the images you've saved. Clicking on an im
 ## On PC
 Same as on mobile, but instead of being able to take a picture directly, you are able to upload an image from your local filesystem. Here are some sample images you can save and use when trying the app:
 
-![Sample image 1](https://lh3.googleusercontent.com/R_hNRocdupb8aXqGdpEDajKc6pehapFfmXiq6qY3o7tTIpXkWz57j1WUD5PGRuucVP0cj5twJ855Wpv36ZkA-7zX-F-msg0s30u23sYAC94ergvDWaB3JOxhvswR4-v-iZJgqsE8qbftYTad3HPvSsuzLfR4Q_FKoDS7LylTmegY5QYV-mafy5HIIx0Sr_Xduc8T7OZDYDPrrVVqUCvqM_IS3fzgBB2tk4jhtiq5jxCPYRJN2OQ-71ltUZt45hZjQkcPbx6tulyW1A7hz4cYyMy1EpPNu_yoJkhpTLAc0fmWWl94hftfhB388WgFWTSxAUIyiDhCGkhJwjNmLqlxIWdD6IiBnzxxuyNUO5Etk6OBk0ikH7h2CPChK1DPrMQT_QYT-GmgqnKoxDbyk6mhPqA-TT_xZXAzqt7Nz9q-tSaC4OPc2wL2qQHvWUlfw7mbBKIj_7n53NP2hXHJCwX6fjV2L1dOxKUaBrTQsmrGgTndiZpcEOVl3lMTC8RhhfoNefKZUQqhQLeH8Jtk5WFGUVbhAWjDfNEQXsgeVkc_ctGDy5AMnFrA_avRNZMAOGu2KNz9E771WhIXPmVYIDanaPZPucV1qgT-xJxCbzsxM4T11oV6zuqMzcDhjVmsrtNWdx_j8oDjMonARzc_SGTdCm8=s496-no)
+![Sample image 1](readme_gifs/jp4.gif)
 
 <br>
 
-![Sample image 2](https://lh3.googleusercontent.com/XFhiBim30Lhv3qf9XG52o_w4VK3VPRug2amE-mdM7q-SHxiVwvGhvmyAoL1NX46t_-vDL9_BUSgHwtD-bcKHx4B3D-rtuKeA6h2w1BDuEDuc5agDrciSBuuwQHA8GRJc7k9_FDc6wQN1VDgzIQ63_vTMoQ23hM8KUfjhS3m9fN5758ilxygGNUo3nLHA2lohJSo0TEGIfEn-jpPggnl2TK4RyP993kjFACNj1LtiukAlZ2LAULKCjuugJvKLiNBDJbXvHjpH0dagwxofHWoKP-TSfRS66ZD7qUftilq4Sft16I4oZ_MnwjZwkRmXqaojvIanejZwuP1zriqOIzvG6MdGOL0QCMdXUnokVEUk6kN4CjA8xQVt7PzxDudTPQb4Uqcnl8xOfZe1GkVIlTn9vIo5AbCbielMSfdaepqRRuwQSddBAtsNJlMTFtP7L74ITXu2eYGbV9iuwbNS0lwX8HeOBAM0PH55AoIvyjvRz7mUBCQ8YRoODe08l1ZhWNp1-fW6WTlw7sJ8Qi6xlFm90JtOUSUlmElq-4h6UyQNcpVwqO7IuCXt6rpntQYR2pLHPrDzIoxoelfEIqbOcPnCPgu5rRKOpih_bRlmPXdjKZqvKPzp7pjdfiKfOlLs-6uWMl66sC4RkUlEewTdjuW9ius=s496-no)
+![Sample image 2](readme_gifs/fr2.jpg)
 
 ## Tips
 The text detection is powered by the Google Vision API. For better results:
