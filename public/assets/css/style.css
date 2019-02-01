@@ -96,6 +96,31 @@ footer {
     background-size: cover;
 }
 
+.jumbotron-content {
+    color: white; 
+    height: 100px; 
+    width: 100%; 
+    position: absolute; 
+    margin: auto; 
+    top: -20%; 
+    right: 0; 
+    bottom: 0; 
+    left: 0;
+}
+
+.button {
+    color: white;
+    font-size: 18px;
+    background-color: rgb(20, 172, 172);
+    text-align: center;
+    border: 2px solid rgb(20, 172, 172);
+    width: 150px;
+    margin: 10px auto;
+    border-radius: 26px;
+    padding: 11px 23px;
+    cursor: pointer;
+  }
+
 .home-card {
     border-style: none;
 }
@@ -156,6 +181,19 @@ div.features> div.heading {
 
 /*////////////////////////////////////////////////////*/
 /* Picture page CSS */
+
+.btn-blue {
+    background-color: #166bb1;
+    border-color: #166bb1;
+    color: white;
+}
+
+.btn-light-blue {
+    background-color: rgb(20, 172, 172);
+    border-color: rgb(20, 172, 172);
+    color: white;
+    
+}
 
 .card-header {
     font-size: 20px;

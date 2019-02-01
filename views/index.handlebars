@@ -7,7 +7,7 @@
 </div>
 
 <!-- Carousel -->
-<div class="carousel slide carousel-fade" data-ride="carousel" data-interval='7000'>
+<div class="carousel slide carousel-fade" data-ride="carousel" data-interval='8000' style="position: relative; margin-top: -21px;">
   <div class="carousel-inner">
     <div class="carousel-item active jumbotron text-center" id="slide1">
       {{> jumbotron-content-partial }}
@@ -70,3 +70,11 @@
 </div>
 
 {{> footer-partial }}
+
+<script>
+  $(document).ready(function() {
+    $(".button").on("click", function(event) {
+      location.href = "/picture";
+    })
+  })
+</script>
