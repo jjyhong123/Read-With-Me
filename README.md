@@ -46,13 +46,12 @@ Same as on mobile, but instead of being able to take a picture directly, you are
 
 ## Tips
 The text detection is powered by the Google Vision API. For better results:
-* Make sure the text you wish to capture is within 90 degrees of the horizontal axis of the picture.
 * Multi-column layouts are not supported.
 * Avoid highly stylized fonts.
 
 Some things to note when using on mobile:
 * On iOS devices, pictures taken in portrait orientation will display rotated clockwise 90 degrees on the library page. 
-* Due to a bug inherent to the HTML5 audio element, the generated audio file will only play once, after which point the audio button becomes unresponsive. To play the audio again, you will need to refresh the page.
+* A bug related to the HTML5 audio element causes the generated audio file to only play once, after which point the audio button becomes unresponsive. To play the audio again, you will need to refresh the page.
 
 # Demo (on mobile)
 
