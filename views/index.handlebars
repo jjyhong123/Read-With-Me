@@ -3,7 +3,9 @@
 
 <!-- Static jumbotron (displays on mobile devices only) -->
 <div class="jumbotron text-center static">
-  {{> jumbotron-content-partial }}
+    <h1>A multilingual image-to-voice app.</h1> 
+    <div class="button">Get started</div>
+  </div>
 </div>
 
 <!-- Carousel -->
@@ -25,7 +27,7 @@
   <div class="row heading">
     <div class="col-md-12" style="text-align: center">
       <h4>
-        
+
       </h4>
     </div>
   </div>
@@ -57,8 +59,8 @@
         <h3>
           <strong>A portable polyglot in your palm</strong>
         </h3>
-        <p>Read With Me automatically detects the language and reads the text accordingly. Translate from or into any of the app's 19
-          supported languages.</p>
+        <p>Read With Me automatically detects the language and reads the text accordingly. Translate from or into any of the
+          app's 19 supported languages.</p>
       </div>
     </div>
 
@@ -72,8 +74,8 @@
 {{> footer-partial }}
 
 <script>
-  $(document).ready(function() {
-    $(".button").on("click", function(event) {
+  $(document).ready(function () {
+    $(".button").on("click", function (event) {
       location.href = "/picture";
     })
   })
